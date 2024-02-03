@@ -8,6 +8,7 @@ _Include link to front-end repo_
 
 1. [**Project Overview**](#project-overview)
 1. [**Project Planning**](#project-planning)
+    - [**Site Aims**](#site-aims)
     - [**User Stories**](#user-stories)
 1. [**Data Models**](#data-models)
 1. [**API Endpoints**](#api-endpoints)
@@ -21,6 +22,8 @@ _Include link to front-end repo_
     - [**Code and Content References**](#code-and-content-references)
 
 ## Project Planning
+
+### Site Aims
 
 ### User Stories
 
