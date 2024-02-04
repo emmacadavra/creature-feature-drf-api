@@ -81,3 +81,5 @@ IMPORTANT - If developing locally on your device, ensure you set up/activate the
 * All of my wonderful friends who helped me populate the database/app with profiles and content!
 
 ### Code and Content References
+
+* Entire Profiles model taken from course content
