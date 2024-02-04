@@ -47,15 +47,30 @@ _Link to separate TESTING.md doc, with details of both manual and automated test
 
 ## **Deployment**
 
+#### **Cloning/Forking**
+
 _How to download and set up project locally, and how it can be deployed - remember the following:_
 _"If you are cloning my project, then you can skip all pip installs below and just run the following command in the terminal to install all the required libraries/packages at once:
 pip install -r requirements.txt
 IMPORTANT - If developing locally on your device, ensure you set up/activate the virtual environment (see below) before installing/generating the requirements.txt file; failure to do this will pollute your machine and put other projects at risk"_
 
+#### **Project Setup**
+
 * Cmd for setting up venv: python3 -m venv [your_venv_name] (source [your_venv_name]/bin/activate to activate venv)
 * Follow instructions on project set up cheatsheet EXCEPT FOR:
     * pip install Pillow==8.2.0 - **USE pip install Pillow==9.3.0 INSTEAD**
-    * 
+* pip3 freeze --local > requirements.txt
+
+#### **Database Setup**
+
+* ElephantSQL
+
+#### **Environment Variables and Settings**
+
+#### **Cloudinary**
+
+#### **Deployment to Heroku**
+
 
 ## **Credits**
 
