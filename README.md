@@ -52,6 +52,8 @@ _"If you are cloning my project, then you can skip all pip installs below and ju
 pip install -r requirements.txt
 IMPORTANT - If developing locally on your device, ensure you set up/activate the virtual environment (see below) before installing/generating the requirements.txt file; failure to do this will pollute your machine and put other projects at risk"_
 
+* Cmd for setting up venv: python3 -m venv [your_venv_name]
+
 ## **Credits**
 
 ### **Honourable Mentions**
