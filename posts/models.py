@@ -13,9 +13,8 @@ class Post(models.Model):
         ('kelvin', 'Kelvin'), ('normal', 'Normal'),
         ('nashville', 'Nashville'), ('rise', 'Rise'),
         ('toaster', 'Toaster'), ('valencia', 'Valencia'),
-        ('walden', 'Walden'), ('xpro2', 'X-pro II')
+        ('walden', 'Walden'), ('xpro2', 'X-pro II'),
     ]
-
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     content = models.TextField(blank=True)
