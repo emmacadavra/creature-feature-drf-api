@@ -82,4 +82,4 @@ IMPORTANT - If developing locally on your device, ensure you set up/activate the
 
 ### Code and Content References
 
-* Entire Profiles app (model, serializer, views + urls) taken from course content
+* Entire Profiles app (model, serializer, views + urls), and IsOwnerOrReadOnly (permissions.py) taken from course content
