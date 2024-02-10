@@ -11,7 +11,7 @@ class Comment(models.Model):
     content = models.TextField()
 
     class Meta:
-        ordering = ['-created_at']
+        ordering = ['-created_on']
 
     def __str__(self):
         return self.content
