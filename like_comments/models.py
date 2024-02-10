@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from comments.models import Comment
 
 
-class Like(models.Model):
+class LikeComment(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
     created_on = models.DateTimeField(auto_now_add=True)
