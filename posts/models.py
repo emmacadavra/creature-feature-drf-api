@@ -1,8 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-# Add class containing post categories:
-# 'Fluffy Fiends', 'Scaly Sweethearts', 'Feathered Familiars' (or something)
+
+class CategoryTag(models.TextChoices):
+    FLUFFY = 'Facinorous Fluffballs'
+    SCALY = 'Reptillian Villains'
+    FEATHERS = 'Feathered Fiends'
 
 
 class Post(models.Model):
@@ -24,7 +27,7 @@ class Post(models.Model):
     image_filter = models.CharField(
         max_length=32, choices=image_filter_choices, default='normal'
     )
-    # add category field here
+    category = models.CharField(max_length=40, choices=CategoryTag.choices)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 
