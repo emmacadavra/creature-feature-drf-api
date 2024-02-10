@@ -9,7 +9,7 @@ class ReactionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reaction
         fields = [
-            'id', 'owner', 'post', 'reaction', 'created_on'
+            'id', 'owner', 'post', 'reaction', 'created_on',
         ]
 
     def create(self, validated_data):
