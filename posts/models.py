@@ -27,7 +27,11 @@ class Post(models.Model):
     image_filter = models.CharField(
         max_length=32, choices=image_filter_choices, default='normal'
     )
-    category = models.CharField(max_length=40, choices=CategoryTag.choices)
+    category = models.CharField(
+        max_length=40,
+        choices=CategoryTag.choices,
+        default=CategoryTag.FLUFFY
+    )
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 
