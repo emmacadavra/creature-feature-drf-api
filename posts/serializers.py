@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from .models import Post, CategoryTag
+from posts.models import Post, CategoryTag
+from reactions.models import Reaction, Reactions
 
 
 class PostSerializer(serializers.ModelSerializer):
@@ -7,6 +8,7 @@ class PostSerializer(serializers.ModelSerializer):
     is_owner = serializers.SerializerMethodField()
     profile_id = serializers.ReadOnlyField(source='owner.profile.id')
     profile_image = serializers.ReadOnlyField(source='owner.profile.image.url')
+    reaction_id = serializers.SerializerMethodField()
 
     def validate_image(self, value):
         if value.size > 1024 * 1024 * 2:
@@ -27,11 +29,19 @@ class PostSerializer(serializers.ModelSerializer):
         request = self.context['request']
         return request.user == obj.owner
 
+    def get_reaction_id(self, obj):
+        user = self.context['request'].user
+        if user.is_authenticated:
+            reaction = Reaction.objects.filter(
+                owner=user, post=obj
+            ).first()
+            return reaction.id if reaction else None
+        return None
+
     class Meta:
         model = Post
         fields = [
-            'id', 'owner', 'is_owner', 'profile_id',
-            'profile_image', 'title', 'content', 'image',
-            'image_filter', 'category', 'created_on',
-            'updated_on',
+            'id', 'owner', 'is_owner', 'profile_id', 'profile_image',
+            'title', 'content', 'image', 'image_filter', 'category',
+            'reaction_id', 'created_on', 'updated_on',
         ]
