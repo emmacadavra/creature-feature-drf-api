@@ -35,8 +35,8 @@ class PostDetailViewTests(APITestCase):
             content='...youre finally awake'
         )
         Post.objects.create(
-            owner=meridia, title='surprise',
-            content='A NEW HAND TOUCHES THE BEACON'
+            owner=meridia, title='the break of dawn',
+            content='surprise'
         )
 
     def test_can_retrieve_post_with_valid_id(self):
