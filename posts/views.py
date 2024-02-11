@@ -1,5 +1,6 @@
 from django.db.models import Count
 from rest_framework import generics, permissions, filters
+from django_filters.rest_framework import DjangoFilterBackend
 from creature_feature_api.permissions import IsOwnerOrReadOnly
 from .models import Post
 from .serializers import PostSerializer
@@ -16,6 +17,7 @@ class PostList(generics.ListCreateAPIView):
     filter_backends = [
         filters.OrderingFilter,
         filters.SearchFilter,
+        DjangoFilterBackend,
     ]
     ordering_fields = [
         'reactions_count',
@@ -26,6 +28,11 @@ class PostList(generics.ListCreateAPIView):
         'owner__username',
         'title',
         'category',
+    ]
+    filterset_fields = [
+        'owner__profile',
+        'owner__followed__owner__profile',
+        'reactions__owner__profile',
     ]
 
     def perform_create(self, serializer):
