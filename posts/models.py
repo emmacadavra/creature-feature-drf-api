@@ -18,6 +18,7 @@ class Post(models.Model):
         ('toaster', 'Toaster'), ('valencia', 'Valencia'),
         ('walden', 'Walden'), ('xpro2', 'X-pro II'),
     ]
+
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     content = models.TextField(blank=True)
