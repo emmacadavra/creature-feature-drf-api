@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 
 
 class Profile(models.Model):
+    # ADD DOCSTRING
     owner = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=255, blank=True)
     content = models.TextField(blank=True)
@@ -21,6 +22,7 @@ class Profile(models.Model):
 
 
 def create_profile(sender, instance, created, **kwargs):
+    # ADD DOCSTRING
     if created:
         Profile.objects.create(owner=instance)
 

@@ -5,6 +5,7 @@ from .serializers import LikeCommentSerializer
 
 
 class LikedCommentList(generics.ListCreateAPIView):
+    # ADD DOCSTRING
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     serializer_class = LikeCommentSerializer
     queryset = LikeComment.objects.all()
@@ -14,6 +15,7 @@ class LikedCommentList(generics.ListCreateAPIView):
 
 
 class LikedCommentDetail(generics.RetrieveDestroyAPIView):
+    # ADD DOCSTRING
     permission_classes = [IsOwnerOrReadOnly]
     serializer_class = LikeCommentSerializer
     queryset = LikeComment.objects.all()

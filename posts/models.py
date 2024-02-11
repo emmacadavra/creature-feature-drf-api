@@ -9,6 +9,7 @@ class CategoryTag(models.TextChoices):
 
 
 class Post(models.Model):
+    # ADD DOCSTRING
     image_filter_choices = [
         ('_1977', '1977'), ('brannan', 'Brannan'),
         ('earlybird', 'Earlybird'), ('hudson', 'Hudson'),

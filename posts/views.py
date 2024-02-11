@@ -5,6 +5,7 @@ from .serializers import PostSerializer
 
 
 class PostList(generics.ListCreateAPIView):
+    # ADD DOCSTRING
     serializer_class = PostSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Post.objects.all()
@@ -14,6 +15,7 @@ class PostList(generics.ListCreateAPIView):
 
 
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
+    # ADD DOCSTRING
     serializer_class = PostSerializer
     permission_classes = [IsOwnerOrReadOnly]
     queryset = Post.objects.all()

@@ -4,6 +4,7 @@ from comments.models import Comment
 
 
 class LikeComment(models.Model):
+    # ADD DOCSTRING
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
     created_on = models.DateTimeField(auto_now_add=True)
