@@ -4,6 +4,7 @@ from .models import Reaction
 
 
 class ReactionSerializer(serializers.ModelSerializer):
+    # ADD DOCSTRING
     owner = serializers.ReadOnlyField(source='owner.username')
 
     class Meta:

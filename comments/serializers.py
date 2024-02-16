@@ -4,6 +4,7 @@ from comments.models import Comment
 
 
 class CommentSerializer(serializers.ModelSerializer):
+    # ADD DOCSTRING
     owner = serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()
     profile_id = serializers.ReadOnlyField(source='owner.profile.id')
@@ -31,4 +32,5 @@ class CommentSerializer(serializers.ModelSerializer):
 
 
 class CommentDetailSerializer(CommentSerializer):
+    # ADD DOCSTRING
     post = serializers.ReadOnlyField(source='post.id')
