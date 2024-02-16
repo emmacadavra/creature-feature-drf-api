@@ -1,9 +1,10 @@
-from django.db.models import Count
+from django.db.models import Count, Case, When, IntegerField
+from django.db.models.functions import Coalesce
 from rest_framework import generics, permissions, filters
 from django_filters.rest_framework import DjangoFilterBackend
 from creature_feature_api.permissions import IsOwnerOrReadOnly
-from .models import Post
-from .serializers import PostSerializer
+from posts.models import Post
+from posts.serializers import PostSerializer
 
 
 class PostList(generics.ListCreateAPIView):
@@ -13,6 +14,18 @@ class PostList(generics.ListCreateAPIView):
     queryset = Post.objects.annotate(
         reactions_count=Count('reactions', distinct=True),
         comments_count=Count('comment', distinct=True),
+        crown_count=Coalesce(Count(Case(
+            When(reactions__reaction='CROWN', then=1),
+            output_field=IntegerField(),
+        )), 0),
+        good_count=Coalesce(Count(Case(
+            When(reactions__reaction='GOOD', then=1),
+            output_field=IntegerField(),
+        )), 0),
+        love_count=Coalesce(Count(Case(
+            When(reactions__reaction='LOVE', then=1),
+            output_field=IntegerField(),
+        )), 0),
     ).order_by('-created_on')
     filter_backends = [
         filters.OrderingFilter,
@@ -22,6 +35,9 @@ class PostList(generics.ListCreateAPIView):
     ordering_fields = [
         'reactions_count',
         'comments_count',
+        'crown_count',
+        'good_count',
+        'love_count',
         'reactions__created_on',
     ]
     search_fields = [
