@@ -24,10 +24,10 @@ class Post(models.Model):
         ('toaster', 'Toaster'), ('valencia', 'Valencia'),
         ('walden', 'Walden'), ('xpro2', 'X-pro II'),
     ]
-    post_options = (
+    post_options = [
         ('draft', 'Draft'),
         ('published', 'Published'),
-    )
+    ]
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     excerpt = models.TextField(null=True)

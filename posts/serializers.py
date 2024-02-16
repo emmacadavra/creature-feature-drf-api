@@ -11,6 +11,9 @@ class PostSerializer(serializers.ModelSerializer):
     reaction_id = serializers.SerializerMethodField()
     reactions_count = serializers.ReadOnlyField()
     comments_count = serializers.ReadOnlyField()
+    crown_count = serializers.ReadOnlyField()
+    good_count = serializers.ReadOnlyField()
+    love_count = serializers.ReadOnlyField()
 
     def validate_image(self, value):
         if value.size > 1024 * 1024 * 2:
@@ -46,5 +49,6 @@ class PostSerializer(serializers.ModelSerializer):
             'id', 'owner', 'is_owner', 'profile_id', 'profile_image',
             'title', 'excerpt', 'content', 'image', 'image_filter',
             'category', 'status', 'reaction_id', 'reactions_count',
-            'comments_count', 'created_on', 'updated_on',
+            'comments_count', 'crown_count', 'good_count', 'love_count',
+            'created_on', 'updated_on',
         ]
