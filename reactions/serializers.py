@@ -1,6 +1,6 @@
 from django.db import IntegrityError
 from rest_framework import serializers
-from .models import Reaction, Reactions
+from .models import Reaction
 
 
 class ReactionSerializer(serializers.ModelSerializer):

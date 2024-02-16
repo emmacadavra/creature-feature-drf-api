@@ -47,3 +47,9 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
         reactions_count=Count('reactions', distinct=True),
         comments_count=Count('comment', distinct=True),
     ).order_by('-created_on')
+
+
+class CategoryList(generics.ListCreateAPIView):
+    serializer_class = PostSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    queryset = Post.objects.all()

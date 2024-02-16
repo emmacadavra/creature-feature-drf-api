@@ -1,6 +1,6 @@
 from rest_framework import generics, permissions
 from creature_feature_api.permissions import IsOwnerOrReadOnly
-from .models import Reaction, Reactions
+from .models import Reaction
 from .serializers import ReactionSerializer
 
 
