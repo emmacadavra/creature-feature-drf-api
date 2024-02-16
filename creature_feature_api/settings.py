@@ -39,8 +39,9 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = 'DEV' in os.environ
 
 ALLOWED_HOSTS = [
+    os.environ.get('ALLOWED_HOST'),
     '127.0.0.1',
-    'https://creature-feature-api-43ea2b93451a.herokuapp.com/',
+    # 'https://creature-feature-api-43ea2b93451a.herokuapp.com',
 ]
 
 
