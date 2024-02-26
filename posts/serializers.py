@@ -8,7 +8,7 @@ class PostSerializer(serializers.ModelSerializer):
     is_owner = serializers.SerializerMethodField()
     profile_id = serializers.ReadOnlyField(source='owner.profile.id')
     profile_image = serializers.ReadOnlyField(source='owner.profile.image.url')
-    reaction_id = serializers.SerializerMethodField()
+    current_user_reaction = serializers.SerializerMethodField()
     reactions_count = serializers.ReadOnlyField()
     comments_count = serializers.ReadOnlyField()
     crown_count = serializers.ReadOnlyField()
@@ -34,13 +34,21 @@ class PostSerializer(serializers.ModelSerializer):
         request = self.context['request']
         return request.user == obj.owner
 
-    def get_reaction_id(self, obj):
+    def get_current_user_reaction(self, obj):
         user = self.context['request'].user
         if user.is_authenticated:
             reaction = Reaction.objects.filter(
                 owner=user, post=obj
             ).first()
-            return reaction.id if reaction else None
+
+            if not reaction:
+                return None
+
+            return {
+                "reaction_id": reaction.id,
+                "reaction type": reaction.reaction
+            }
+            # return reaction.id if reaction else None
         return None
 
     class Meta:
@@ -48,7 +56,7 @@ class PostSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'owner', 'is_owner', 'profile_id', 'profile_image',
             'title', 'excerpt', 'content', 'image', 'image_filter',
-            'category', 'status', 'reaction_id', 'reactions_count',
+            'category', 'status', 'current_user_reaction', 'reactions_count',
             'comments_count', 'crown_count', 'good_count', 'love_count',
             'created_on', 'updated_on',
         ]

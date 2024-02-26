@@ -5,9 +5,9 @@ from posts.models import Post
 
 class Reaction(models.Model):
     reaction_choices = [
-        ('CROWN', 'Your Highness!'),
-        ('GOOD', 'Good Girl/Boy!'),
-        ('LOVE', 'I love you!'),
+        ('CROWN', 'CROWN'),
+        ('GOOD', 'GOOD'),
+        ('LOVE', 'LOVE'),
     ]
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(
