@@ -46,7 +46,7 @@ class PostSerializer(serializers.ModelSerializer):
 
             return {
                 "reaction_id": reaction.id,
-                "reaction type": reaction.reaction
+                "reaction_type": reaction.reaction
             }
             # return reaction.id if reaction else None
         return None
