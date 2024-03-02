@@ -11,9 +11,9 @@ class Post(models.Model):
             return super().get_queryset().filter(status='published')
 
     category_choices = [
-        ('fluffy', 'Facinorous Fluffballs'),
-        ('scaly', 'Reptillian Villains'),
-        ('feathers', 'Feathered Fiends'),
+        ('Facinorous Fluffballs', 'Facinorous Fluffballs'),
+        ('Reptillian Villains', 'Reptillian Villains'),
+        ('Feathered Fiends', 'Feathered Fiends'),
     ]
     image_filter_choices = [
         ('_1977', '1977'), ('brannan', 'Brannan'),
