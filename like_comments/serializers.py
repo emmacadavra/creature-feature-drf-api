@@ -9,7 +9,7 @@ class LikeCommentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = LikeComment
-        fields = ['id', 'created_on', 'owner', 'post']
+        fields = ['id', 'created_on', 'owner', 'comment']
 
     def create(self, validated_data):
         try:
