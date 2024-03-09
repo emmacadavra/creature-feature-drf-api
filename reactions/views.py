@@ -13,7 +13,7 @@ class ReactionList(generics.ListCreateAPIView):
         serializer.save(owner=self.request.user)
 
 
-class ReactionDetail(generics.RetrieveDestroyAPIView):
+class ReactionDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsOwnerOrReadOnly]
     serializer_class = ReactionSerializer
     queryset = Reaction.objects.all()
