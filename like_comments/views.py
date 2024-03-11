@@ -11,7 +11,7 @@ class LikeList(generics.ListCreateAPIView):
     """
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     serializer_class = LikeCommentSerializer
-    queryset = LikeComment.objects.annotate()
+    queryset = LikeComment.objects.all()
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
