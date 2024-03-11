@@ -4,7 +4,9 @@ from posts.models import Post
 
 
 class Comment(models.Model):
-    # ADD DOCSTRING
+    """
+    Comment model which handles user comments on individual posts.
+    """
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     created_on = models.DateTimeField(auto_now_add=True)

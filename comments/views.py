@@ -7,13 +7,18 @@ from rest_framework.pagination import PageNumberPagination
 
 
 class CommentsSetPagination(PageNumberPagination):
-    page_size = 1000
+    """
+    Custom pagination class for comments, overriding the global default of 10.
+    """
+    page_size = 100
     page_size_query_param = 'page_size'
-    max_page_size = 10000
+    max_page_size = 1000
 
 
 class CommentList(generics.ListCreateAPIView):
-    # ADD DOCSTRING
+    """
+    Lists all comments, enables logged in users to create comments.
+    """
     serializer_class = CommentSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     pagination_class = CommentsSetPagination
@@ -26,7 +31,10 @@ class CommentList(generics.ListCreateAPIView):
 
 
 class CommentDetail(generics.RetrieveUpdateDestroyAPIView):
-    # ADD DOCSTRING
+    """
+    Retrieves an individual comment by id,
+    enables comment owners to edit or delete.
+    """
     permission_classes = [IsOwnerOrReadOnly]
     serializer_class = CommentDetailSerializer
     queryset = Comment.objects.all()

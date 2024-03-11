@@ -4,7 +4,10 @@ from like_comments.models import LikeComment
 
 
 class LikeCommentSerializer(serializers.ModelSerializer):
-    # ADD DOCSTRING
+    """
+    Serializer for the LikeComment model. The 'create' method
+    handles the unique constraint on 'owner' and 'comment'.
+    """
     owner = serializers.ReadOnlyField(source='owner.username')
 
     class Meta:

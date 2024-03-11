@@ -3,7 +3,10 @@ from rest_framework import serializers
 
 
 class CurrentUserSerializer(UserDetailsSerializer):
-    # ADD DOCSTRING
+    """
+    Serializer that obtains the current logged
+    in user's profile ID and profile image.
+    """
     profile_id = serializers.ReadOnlyField(source='profile.id')
     profile_image = serializers.ReadOnlyField(source='profile.image.url')
 

@@ -3,10 +3,16 @@ from django.contrib.auth.models import User
 
 
 class Post(models.Model):
-    # ADD DOCSTRING
+    """
+    Post model, related to a User instance (owner). A default
+    image is set so that image.url can always be referenced.
+    """
 
     class PostObjects(models.Manager):
-        # ADD DOCSTRING
+        """
+        Custom database query manager for the Post model,
+        ensures all posts displayed in front-end are 'published'.
+        """
         def get_queryset(self):
             return super().get_queryset().filter(status='published')
 
@@ -33,7 +39,7 @@ class Post(models.Model):
     excerpt = models.TextField(null=True)
     content = models.TextField(blank=True)
     image = models.ImageField(
-        upload_to='images/', default='../default_profile_kkmzvb', blank=True
+        upload_to='images/', default='../default_post_khv8hr', blank=True
     )
     image_filter = models.CharField(
         max_length=32,

@@ -4,7 +4,10 @@ from .models import Reaction
 
 
 class ReactionSerializer(serializers.ModelSerializer):
-    # ADD DOCSTRING
+    """
+    Serializer for the Reaction model. The 'create' method
+    handles the unique constraint on 'owner' and 'comment'.
+    """
     owner = serializers.ReadOnlyField(source='owner.username')
 
     class Meta:

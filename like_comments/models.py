@@ -4,7 +4,10 @@ from comments.models import Comment
 
 
 class LikeComment(models.Model):
-    # ADD DOCSTRING
+    """
+    LikeComment model, related to 'owner' and 'comment'. The 'unique_together'
+    attribute ensures Users can't like the same comment twice.
+    """
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     comment = models.ForeignKey(
         Comment,

@@ -5,6 +5,10 @@ from .serializers import ReactionSerializer
 
 
 class ReactionList(generics.ListCreateAPIView):
+    """
+    Lists all reactions, enables logged in users to create new reactions.
+    The 'perform_create' method associates a reaction with a logged in User.
+    """
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     serializer_class = ReactionSerializer
     queryset = Reaction.objects.all()
@@ -14,6 +18,10 @@ class ReactionList(generics.ListCreateAPIView):
 
 
 class ReactionDetail(generics.RetrieveUpdateDestroyAPIView):
+    """
+    Retrieves an individual reaction by ID, enables reaction
+    owners to edit or delete their reaction on every post.
+    """
     permission_classes = [IsOwnerOrReadOnly]
     serializer_class = ReactionSerializer
     queryset = Reaction.objects.all()

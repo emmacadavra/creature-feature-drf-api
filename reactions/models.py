@@ -4,6 +4,11 @@ from posts.models import Post
 
 
 class Reaction(models.Model):
+    """
+    Reaction model, related to a User instance (owner)
+    and Post. The 'unique_together' attribute ensures
+    that Users can only choose one reaction type per post.
+    """
     reaction_choices = [
         ('CROWN', 'CROWN'),
         ('GOOD', 'GOOD'),

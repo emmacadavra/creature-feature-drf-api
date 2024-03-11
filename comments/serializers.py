@@ -5,7 +5,10 @@ from like_comments.models import LikeComment
 
 
 class CommentSerializer(serializers.ModelSerializer):
-    # ADD DOCSTRING
+    """
+    Serializer for the Comment model. Adds additional fields when returning
+    a list of Comment instances and links Comments to LikeComment.
+    """
     owner = serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()
     profile_id = serializers.ReadOnlyField(source='owner.profile.id')
@@ -44,5 +47,8 @@ class CommentSerializer(serializers.ModelSerializer):
 
 
 class CommentDetailSerializer(CommentSerializer):
-    # ADD DOCSTRING
+    """
+    Serializer for the Comment model's detail view. Post is set as a
+    read only field so that it doesn't have to be set on each update.
+    """
     post = serializers.ReadOnlyField(source='post.id')

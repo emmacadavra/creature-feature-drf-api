@@ -8,7 +8,11 @@ from posts.serializers import PostSerializer
 
 
 class PostList(generics.ListCreateAPIView):
-    # ADD DOCSTRING
+    """
+    Lists posts, enables logged in users to create new posts.
+    Also enables filtering posts and handles the post reactions.
+    The 'perform_create' method associates a post with a logged in User.
+    """
     serializer_class = PostSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Post.objects.annotate(
@@ -54,7 +58,10 @@ class PostList(generics.ListCreateAPIView):
 
 
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
-    # ADD DOCSTRING
+    """
+    Retrieves an individual post, enables post
+    owners to edit or delete the post.
+    """
     serializer_class = PostSerializer
     permission_classes = [IsOwnerOrReadOnly]
     queryset = Post.objects.annotate(

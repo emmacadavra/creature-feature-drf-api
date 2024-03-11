@@ -5,7 +5,10 @@ from .serializers import FollowerSerializer
 
 
 class FollowerList(generics.ListCreateAPIView):
-    # ADD DOCSTRING
+    """
+    Lists all instances of a User following another User,
+    and enables logged in Users to follow other Users.
+    """
     serializer_class = FollowerSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Follower.objects.all()
@@ -15,7 +18,10 @@ class FollowerList(generics.ListCreateAPIView):
 
 
 class FollowerDetail(generics.RetrieveDestroyAPIView):
-    # ADD DOCSTRING
+    """
+    Retrieves an individual follower (ie, instance of a User following
+    another User), enables follower owners to delete it (ie, unfollow).
+    """
     permission_classes = [IsOwnerOrReadOnly]
     serializer_class = FollowerSerializer
     queryset = Follower.objects.all()

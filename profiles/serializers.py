@@ -4,7 +4,10 @@ from followers.models import Follower
 
 
 class ProfileSerializer(serializers.ModelSerializer):
-    # ADD DOCSTRING
+    """
+    Serializer for the Profile model. Adds additional fields when returning
+    a list of Profile instances and links Profile to Posts and Followers.
+    """
     owner = serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()
     following_id = serializers.SerializerMethodField()

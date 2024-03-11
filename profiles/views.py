@@ -8,7 +8,10 @@ from .serializers import ProfileSerializer
 
 
 class ProfileList(generics.ListAPIView):
-    # ADD DOCSTRING
+    """
+    Lists all profiles, enables filtering posts by profile. No
+    create view, as profile creation is handled by Django signals.
+    """
     serializer_class = ProfileSerializer
     queryset = Profile.objects.annotate(
         posts_count=Count('owner__post', distinct=True),
@@ -30,7 +33,9 @@ class ProfileList(generics.ListAPIView):
 
 
 class ProfileDetail(generics.RetrieveUpdateAPIView):
-    # ADD DOCSTRING
+    """
+    Retrieves a Profile by ID, enables the profile owner to edit it.
+    """
     serializer_class = ProfileSerializer
     permission_classes = [IsOwnerOrReadOnly]
     queryset = Profile.objects.annotate(

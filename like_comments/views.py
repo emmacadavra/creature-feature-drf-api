@@ -5,7 +5,10 @@ from like_comments.serializers import LikeCommentSerializer
 
 
 class LikeList(generics.ListCreateAPIView):
-    # ADD DOCSTRING
+    """
+    Lists all comments likes, enables logged
+    in users to create a new comment like.
+    """
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     serializer_class = LikeCommentSerializer
     queryset = LikeComment.objects.all()
@@ -15,7 +18,10 @@ class LikeList(generics.ListCreateAPIView):
 
 
 class LikeDetail(generics.RetrieveDestroyAPIView):
-    # ADD DOCSTRING
+    """
+    Retrieves an individual comment like, enables
+    comment like owners to delete it (ie, unlike).
+    """
     permission_classes = [IsOwnerOrReadOnly]
     serializer_class = LikeCommentSerializer
     queryset = LikeComment.objects.all()

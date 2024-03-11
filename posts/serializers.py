@@ -4,6 +4,10 @@ from reactions.models import Reaction
 
 
 class PostSerializer(serializers.ModelSerializer):
+    """
+    Serializer for the Post model. Adds additional fields when returning
+    a list of Post instances and links Post to Comments and Reactions.
+    """
     owner = serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()
     profile_id = serializers.ReadOnlyField(source='owner.profile.id')
@@ -48,7 +52,7 @@ class PostSerializer(serializers.ModelSerializer):
                 "reaction_id": reaction.id,
                 "reaction_type": reaction.reaction
             }
-            # return reaction.id if reaction else None
+
         return None
 
     class Meta:
