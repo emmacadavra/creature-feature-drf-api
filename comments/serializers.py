@@ -14,7 +14,7 @@ class CommentSerializer(serializers.ModelSerializer):
     profile_id = serializers.ReadOnlyField(source='owner.profile.id')
     profile_image = serializers.ReadOnlyField(source='owner.profile.image.url')
     like_id = serializers.SerializerMethodField()
-    likes_count = serializers.ReadOnlyField()
+    like_comments_count = serializers.ReadOnlyField()
     created_on = serializers.SerializerMethodField()
     updated_on = serializers.SerializerMethodField()
 
@@ -41,7 +41,7 @@ class CommentSerializer(serializers.ModelSerializer):
         model = Comment
         fields = [
             'id', 'owner', 'is_owner', 'post', 'content', 'profile_id',
-            'profile_image', 'like_id', 'likes_count', 'created_on',
+            'profile_image', 'like_id', 'like_comments_count', 'created_on',
             'updated_on',
         ]
 
