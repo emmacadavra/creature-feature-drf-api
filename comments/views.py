@@ -1,4 +1,5 @@
 from rest_framework import generics, permissions
+from django.db.models import Count
 from django_filters.rest_framework import DjangoFilterBackend
 from creature_feature_api.permissions import IsOwnerOrReadOnly
 from .models import Comment
@@ -22,7 +23,9 @@ class CommentList(generics.ListCreateAPIView):
     serializer_class = CommentSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     pagination_class = CommentsSetPagination
-    queryset = Comment.objects.all()
+    queryset = Comment.objects.annotate(
+        likes_count=Count('likes', distinct=True)
+    ).order_by('-created_on')
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['post']
 
@@ -37,4 +40,6 @@ class CommentDetail(generics.RetrieveUpdateDestroyAPIView):
     """
     permission_classes = [IsOwnerOrReadOnly]
     serializer_class = CommentDetailSerializer
-    queryset = Comment.objects.all()
+    queryset = Comment.objects.annotate(
+        likes_count=Count('likes', distinct=True)
+    ).order_by('-created_on')
