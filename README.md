@@ -73,7 +73,7 @@ The Follower model allows logged in Users to follow or unfollow other Users on t
 
 The Post model centres around what is arguably the most important part of the Creature Feature app - the ability for users to create, read, update* and delete* (\*if they are the post owner) posts. In addition to the basic expected functionality (such as title, content, image), I have added 'category' as a field, for which there are three choices. These are in line with the overall intention for this app, which is -literally- to feature creatures! I felt that users would appreciate being able to select which variety of creature it is they're featuring, and it also enables users to filter posts based on these categories.
 
-Another custom feature of the Post model is the inclusion of the PostObjects Manager model. A currently hidden feature of the Post model is that it provides users with the ability to store posts they may want to come back to edit later before posting as drafts - this is handled by the PostObjects Manager, and the subsequent 'objects' and 'post_objects' fields. The 'status' field in Post dictates that, by default, all posts are set to 'published' and therefore will appear in any and all searches. Unfortunately at the time of deployment, this feature has not been fully implemented yet, hence being a currently hidden feature. In my Database Schema, there is a field called 'exceprt' which is no longer included in the Post model, but this comes from the same line of thinking as the 'published'/'draft statuses. While currently operating as a single image sharing site, I would like to expand on this in future to implement more blog-like qualities, and create a sort of blog/photo-sharing hybrid. Although I removed 'excerpt', I have decided to keep the PostObjects Manager and the status field where it is, so that I can begin working on this in the near future.
+Another custom feature of the Post model is the inclusion of the PostObjects Manager model. A currently hidden feature of the Post model is that it provides users with the ability to store posts they may want to come back to edit later before posting as drafts - this is handled by the PostObjects Manager, and the subsequent 'objects' and 'post_objects' fields. The 'status' field in Post dictates that, by default, all posts are set to 'published' and therefore will appear in any and all searches. Unfortunately at the time of deployment, this feature has not been fully implemented yet, hence being a currently hidden feature. In the Post model, there is a field called 'excerpt' which comes from the same line of thinking as the 'published'/'draft statuses, though it is not being utilised. I had attempted to remove this field later into development, but unfortunately this caused significant issues with loading the existing data due to the field being part of the individual Post instances. While currently operating as a single image sharing site, I would like to expand on this in future to implement more blog-like qualities, and create a sort of blog/photo-sharing hybrid. Although I removed 'excerpt', I have decided to keep the PostObjects Manager and the status field where it is, so that I can begin working on this in the near future.
 
 #### **Reaction**
 
@@ -118,7 +118,7 @@ A separate file has been created for information about testing. Please click the
 
 ## **Deployment**
 
-In this section I will explain the steps I took in order to deploy this project.
+In this section I will explain the steps I took in order to deploy this project, so that they can be followed if you wish to clone this project and work on it yourself.
 
 #### **Cloning/Forking**
 
@@ -126,26 +126,129 @@ If you wish to create a clone of this project to use on your local machine or vi
 `pip install -r requirements.txt`
 This will install all the required libraries and packages in one go, meaning you will not have to follow the set-up steps below.
 
-As I developed this project locally, I first created a virtual environment using the command `python -m venv .venv` - if you clone this project to use locally, you must do the same. Ensure that the virtual environment is not tracked by version control by adding it to the .gitignore file.
+As I developed this project locally, I first created a virtual environment using the command `python3 -m venv [your_venv_name]` - if you clone this project to use locally, you must do the same. Ensure that the virtual environment is not tracked by version control by adding it to the .gitignore file.
 
 #### **Project Setup**
 
 Below is a list of the steps and terminal commands I used to install the necessary libraries and packages for this project following the creation of the GitHub repository:
 
-- Cmd for setting up venv: python3 -m venv [your_venv_name] (source [your_venv_name]/bin/activate to activate venv)
-- Follow instructions on project set up cheatsheet EXCEPT FOR:
-  - pip install Pillow==8.2.0 - **USE pip install Pillow==9.3.0 INSTEAD**
-- pip3 freeze --local > requirements.txt
+1. Create a virtual environment (as mentioned above):
+   - `python3 -m venv [your_venv_name]`
+   - IMPORTANT: Add the .venv file to .gitignore so that it is not tracked with version control.
+1. Open the virtual environment and install Django with Gunicorn:
+   - `source [your_venv_name]/bin/activate`
+   - `pip install 'django<4' gunicorn`
+1. Install the following supporting libraries:
+   - `pip install django-cloudinary-storage==0.3.0`
+   - `pip install dj-database-url==0.5.0 psychopg2-binary`
+   - `pip install Pillow==9.3.0`
+1. Create a requirements.txt file:
+   - `pip3 freeze --local > requirements.txt`
+1. Create your Django project:
+   - `django-admin startproject project_name .` (note: 'project_name' in this case is 'creature_feature_api' - do not forget the `.` after the project name.)
+1. Create apps within the project:
+   - `python3 manage.py startapp app_name` (note: 'app_name' references the name of the app, and in the case of this project there are several. A separate app should be created for each major aspect of the project, so the apps created for this project are 'comments', 'followers', 'like_comments', 'posts', 'profiles', and 'reactions'.)
+1. In `settings.py`, which is created in the main project directory, add the newly created app(s) to the bottom of the `INSTALLED_APPS` list.
+1. Run the following commands to make migrations, and then migrate the changes:
+   - `python3 manage.py makemigrations`
+   - `python3 manage.py migrate`
+1. To test that everything has been set up correctly, run the server locally:
+   - `python3 manage.py runserver` (note: you may need to adjust the `ALLOWED_HOSTS` section of `settings.py` if Django provides and error stating so.)
 
 #### **Database Setup**
 
-- ElephantSQL
+This project uses [**_ElephantSQL_**](https://www.elephantsql.com/) to host its database. Below are the steps I took following account creation:
+
+1. Click on 'Create New Instance'.
+1. Provide a project name and select the 'Tiny Turtle (Free)' plan.
+1. Click 'Select Region' and choose a nearby data centre.
+1. Review the details of the project before returning to the dashboard.
+1. Copy the ElephantSQL URL, which starts with 'postgres://', in order to link it to the Django project (detailed further below).
 
 #### **Environment Variables and Settings**
 
-#### **Cloudinary**
+1. Create a file in the main project directory called 'env.py', and add it to the .gitignore file - this files stores private environment variables and must be kept hidden.
+1. Add the key `DATABASE_URL` to env.py and assign it the ElephantSQL URL as a value:
+   - `os.environ["DATABASE_URL"] = "postgres://ElephantSQL Database URL"`
+1. Add the key 'SECRET_KEY' to env.py and assign it something secret (and more secure than "SecretKey123"!) as a value:
+   - `os.environ["SECRET_KEY"] = "SecretKey123"`
+1. In `settings.py`, make sure the following code is added to the top of the file:
+   - ![Settings.py imports](docs/images/settings-imports.png)
+1. Replace Django's default 'DATABASES' in the with the following code:
+   - ![Updated DATABASES code](docs/images/databases-updated-code.png)
+1. Replace Django's default 'SECRET_KEY' with the following code:
+   - ![Updated SECRET_KEY code](docs/images/secret-key-code.png)
+
+#### **Django REST and JWTs**
+
+1. Install Django REST Framework:
+   - `pip install djangorestframework`
+   - Add `rest_framework` to your `INSTALLED_APPS`
+1. Install Django Rest Auth:
+   - `pip install dj-rest-auth==2.1.9`
+1. Install Django Filters:
+   - `pip install django-filter`
+1. Add the following to `INSTALLED_APPS`:
+   - `'django_filters'`, `'rest_framework.authtoken'`, `'dj_rest_auth',`
+1. Include the following in the main `urls.py` file:
+   - `urlpatterns = [path('api-auth/', include('rest_framework.urls')), path('dj-rest-auth/', include('dj_rest_auth.urls')), path('', include('profiles.urls')),]`
+1. Migrate the changes to the database (`python3 manage.py migrate`)
+1. Install Django AllAuth:
+   - `pip install 'dj-rest-auth[with_social]'`
+1. Add the following to `INSTALLED_APPS`:
+   - `'django.contrib.sites', 'allauth', 'allauth.account', 'allauth.socialaccount', 'dj_rest_auth.registration',`
+1. Below `INSTALLED_APPS`, add the new variable `SITE_ID=1`
+1. Update the main `urls.py` file:
+   - `urlpatterns = [path('dj-rest-auth/', include('dj_rest_auth.urls')), path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')), path('', include('profiles.urls')),]`
+1. Install Django REST's Simple JWTs:
+   - `pip install djangorestframework-simplejwt==4.7.2`
+1. Create a `DEV` environment variable in your `env.py` file:
+   - `os.environ['DEV'] = 1`
+1. Add the following to `settings.py`:
+   - `REST_FRAMEWORK = { 'DEFAULT_AUTHENTICATION_CLASSES': [( 'rest_framework.authentication.SessionAuthenticatio n' if 'DEV' in os.environ else 'dj_rest_auth.jwt_auth.JWTCookieAuthentication'  )] }`
+   - `REST_USE_JWT = True`
+   - `JWT_AUTH_COOKIE = 'my-app-auth'`
+   - `JWT_AUTH_SECURE = True`
+   - `JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'`
+   - `JWT_AUTH_SAMESITE = 'None'`
+
+#### **Adding the root route**
+
+1. Create a `views.py` file in the main project folder (in this case 'creature_feature_api') and add the following:
+   - `from rest_framework.decorators import api_view`
+   - `from rest_framework.response import Response`
+   - `from .settings import (JWT_AUTH_COOKIE, JWT_AUTH_REFRESH_COOKIE, JWT_AUTH_SAMESITE, JWT_AUTH_SECURE,)`
+1. Add the following to the main `urls.py` file:
+   - `urlpatterns = [path('', root_route)]`
+1. Make sure to update your requirements.txt file (`pip freeze > requirements.txt`)
 
 #### **Deployment to Heroku**
+
+This project is hosted on [**_Heroku_**](https://www.heroku.com/). Below are the steps I took to deploy my project following account creation, project setup and database setup with [**_ElephantSQL_**](https://www.elephantsql.com/):
+
+1. On the Heroku Dashboard, create a new app. The app name must be unique and should be related to the Django project name.
+1. Set location as appropriate.
+1. Open the 'Settings' tab and navigate to 'Config Vars' - Click 'Reveal Config Vars'.
+1. Add the following config vars:
+
+   - `ALLOWED_HOST` = (your hosted front-end site URL)
+   - `DATABASE_URL = postgres://ElephantSQL Database URL` (note that this must be the unique ElephantSQL URL from the created database)
+   - `SECRET KEY = SecretKey123` (note that this must be the unique secret key made previously for this project)
+   - `CLOUDINARY_URL = cloudinary://Cloudinary API URL` (note that this must be the unique Cloudinary API URL obtained previously)
+
+1. Add the following temporary config var (to be removed before final deployment):
+   - `DISABLE_COLLECT_STATIC = 1`
+1. Obtain the project URL from Heroku, and add it to the 'ALLOWED_HOSTS' section of `settings.py`
+1. Create a Procfile in the root project directory and add the following code:
+   - `web: gunicorn project_name.wsgi` (note that 'project_name' must be the same as the Django project)
+1. Save all project files, and use the following commands to add, commit and push the changes to the GitHub repository:
+   - `git add .`
+   - `git commit -m "Initial commit"`
+   - `git push`
+1. Navigate to the 'Deploy' tab in the Heroku dashboard and link the GitHub repository to the project.
+1. Manually deploy from the main GitHub repository branch.
+
+For the final deployment, make sure to set `DEBUG = False` in `settings.py` and remove over environment variables/config vars that are for development only.
 
 ## **Credits**
 
