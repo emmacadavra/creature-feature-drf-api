@@ -93,7 +93,7 @@ The only current exception to this is in Comments. The way I have designed the f
 
 ### **API Endpoints**
 
-[diagrams...?]
+[API ENDPOINTS]
 
 ## **Technologies Used**
 
@@ -137,7 +137,7 @@ Below is a list of the steps and terminal commands I used to install the necessa
    - IMPORTANT: Add the .venv file to .gitignore so that it is not tracked with version control.
 1. Open the virtual environment and install Django with Gunicorn:
    - `source [your_venv_name]/bin/activate`
-   - `pip install 'django<4' gunicorn`
+   - `pip install django gunicorn`
 1. Install the following supporting libraries:
    - `pip install django-cloudinary-storage==0.3.0`
    - `pip install dj-database-url==0.5.0 psychopg2-binary`
@@ -254,10 +254,13 @@ For the final deployment, make sure to set `DEBUG = False` in `settings.py` and 
 
 ### **Honourable Mentions**
 
-- [**_Damon Kreft_**](https://github.com/damon-kreft)
-- [**_Richard Wells_**](https://github.com/D0nni387)
-- All of my wonderful friends who helped me populate the database/app with profiles and content!
+- [**_Damon Kreft_**](https://github.com/damon-kreft) - As always, your support in my journey throughout this course has been the rock that keeps me grounded and I am so grateful for your love and encouragement, especially when I am struggling to get through.
+
+- [**_Richard Wells_**](https://github.com/D0nni387) - I don't think I will ever be able to repay the sheer generosity, kindness and support you have consistently offered me while I have taken this course. I am so thankful to have you as a mentor and hope that all of CI knows how wonderful you are.
+
+- Thank you to all of my wonderful friends who helped me populate the database/app with profiles and content, informed me of issues along the way and generally showed support and cheered me on!
 
 ### Code and Content References
 
-- Entire Profiles app (model, serializer, views + urls), and IsOwnerOrReadOnly (permissions.py) taken from course content
+- This project was created by following along with [**_Code Institute_**](https://codeinstitute.net/)'s 'Django REST Framework' course content and walkthrough, and as such will bear significant resemblence to it - in some case being identical. As well as many instances of my code coming from those lessons, I have also used the default profile image and default post images provided by them. I am extremely grateful to the course providers for their instruction on how to create a Django REST API, and have made an effort where possible to create my own code (especially in the case of Posts and Reactions, and also with LikeComments), and have used newer versions of the technologies where possible, but ultimately the structure of this API is thanks to the code they have taught.
+- The currently unused code in the Post model relating to published status, and the use of Django Model Managers, is thanks to [**_Very Academy_**](https://www.youtube.com/@veryacademy), whose [**_Learn Django Rest Framework YouTube series_**](https://www.youtube.com/watch?v=soxd_xdHR0o&list=PLOLrQ9Pn6caw0PjVwymNc64NkUNbZlhFw&index=2&t=5684s) was extremely interesting and helpful throughout my learing proces.
