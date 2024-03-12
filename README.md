@@ -4,16 +4,21 @@
 
 Creature Feature is a quirky and fun interactive photo-sharing app dedicated to our often smaller - but by no means lesser - animal companions. Although it shares its name with the famous horror/sci-fi genre of films known as 'Creature Features', the creatures featured on this platform are anything but spooky… Unless they want to be, of course! That said, despite the cutesy aesthetic this app employs, the spirit of the genre is subtly kept alive through the unusual names of the post categories users must pick from to let the world know what type of creature it is they’re featuring! The thematic combining of the _’creepy & kooky’_ with the charming & adorable provides a truly distinctive, engaging platform for users to _sink their claws into_.
 
-The primary intention of this app is to provide a smooth, user-friendly platform on which registered users can create posts containing pictures of their beloved pets, and engage with posts created by other users. They can view and follow the profiles of other users whose posts they enjoy, control what they see by utilising a variety of post filters, and - most importantly - interact with and comment on the posts they can see. What makes this app stand out against others of its kind are the three adorable post reactions that replace ‘likes’ or the more traditional kinds of post reactions found on other social media platforms.
+The Creature Feature API is the back-end portion of the Creature Feature app, and has been developed using Django's REST Framework. The app aims to provide users with the ability to share pictures of their pets and/or favourite animals with other like-minded users, build up a profile and follow other profiles they enjoy. This API has been created to ensure that users can enjoy a smooth and seamless user experience, by providing the front-end app with the core functionality it needs.
+
+To view the deployed API, [**_please follow this link_**](https://creature-feature-api-43ea2b93451a.herokuapp.com/).
 
 This is the back-end repository for this project. To go to the front-end repository, [**_please follow this link_**](https://github.com/emmacadavra/creature-feature-react).
+
+To view and explore the deployed Creature Feature front-end app, [**_please follow this link_**](https://creature-feature-react-fb85071d4bc2.herokuapp.com/).
 
 ## **Table of Contents:**
 
 1. [**Project Overview**](#project-overview)
 1. [**Project Planning**](#project-planning)
-   - [**Site Aims**](#site-aims)
+   - [**Project Aims (API)**](#project-aims-api)
    - [**User Stories**](#user-stories)
+1. [**Database Schema**](#database-schema)
 1. [**Data Models**](#data-models)
 1. [**API Endpoints**](#api-endpoints)
 1. [**Technologies Used**](#technologies-used)
@@ -27,15 +32,50 @@ This is the back-end repository for this project. To go to the front-end reposit
 
 ## **Project Planning**
 
-### **Site Aims**
+### **Project Aims (API):**
+
+- To provide the front-end app with a robust back-end counterpart that allows communication between React/JavaScript and Python.
+- To implement user authorisation through the use of Django AllAuth and Django Rest Auth, allowing users to create accounts, login and logout on the front-end
+- To provide CRUD functionality to users on the front-end in relation to posts and comments:
+  - Logged in users can create, edit and delete their own posts.
+  - Logged in users can create, edit and delete their own comments.
+  - Logged in users can choose one of three reactions to any post that is not their own, and they can change or undo these reactions at will.
+  - Logged in users can like any comment that is not their own, and unlike it at will.
+- To provide CRUD functionality to users on the front-end in relation to their profiles and following other profiles:
+  - Logged in users can edit their own profile by uploading a profile image and amending their profile's content whenever they wish.
+  - Logged in users can follow the profiles of other users, and unfollow at will.
+- To provide the front-end with a number of options that allow logged in users to control the posts they see, by applying filters (such as posts by category, only showing posts by users they follow, or viewing the posts they have reacted to) or using the search bar to search for posts that use specific keywords, or are by specific profiles.
+- To allow logged out users to view posts, though without access to post filters or the ability to create, edit or delete posts.
 
 ### **User Stories**
 
-_Include link to GitHub board, and link to separate User Stories document for back-end OR to the front-end repo where I could combine the two_
+The User Stories for this project can be accessed by following this link to [**_the front-end repository’s project board_**](https://github.com/users/emmacadavra/projects/5). Further information on these User Stories an be found in the separate [**_AGILE.md document_**](https://github.com/emmacadavra/creature-feature-react/blob/main/AGILE.md), also within the front-end repository.
 
-## **Data Models**
+## **Database Schema**
 
-## **API Endpoints**
+Below is a diagram that provides a visual overview of the database tables for this project (created using [**_DrawSQL_**](https://drawsql.app/)):
+
+[diagram]
+
+### **Data Models**
+
+#### **User**
+
+#### **Profiles**
+
+#### **Followers**
+
+#### **Posts**
+
+#### **Reactions**
+
+#### **Comments**
+
+#### **Like Comments**
+
+### **API Endpoints**
+
+[diagrams...?]
 
 ## **Technologies Used**
 
