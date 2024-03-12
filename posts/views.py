@@ -21,15 +21,15 @@ class PostList(generics.ListCreateAPIView):
         crown_count=Coalesce(Count(Case(
             When(reactions__reaction='CROWN', then=1),
             output_field=IntegerField(),
-        )), 0),
+        ), distinct=True), 0),
         good_count=Coalesce(Count(Case(
             When(reactions__reaction='GOOD', then=1),
             output_field=IntegerField(),
-        )), 0),
+        ), distinct=True), 0),
         love_count=Coalesce(Count(Case(
             When(reactions__reaction='LOVE', then=1),
             output_field=IntegerField(),
-        )), 0),
+        ), distinct=True), 0),
     ).order_by('-created_on')
     filter_backends = [
         filters.OrderingFilter,
