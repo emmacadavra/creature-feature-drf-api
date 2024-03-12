@@ -36,6 +36,7 @@ class Post(models.Model):
     ]
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
+    excerpt = models.TextField(null=True)
     content = models.TextField(blank=True)
     image = models.ImageField(
         upload_to='images/', default='../default_post_khv8hr', blank=True
