@@ -11,9 +11,9 @@ class CommentsSetPagination(PageNumberPagination):
     """
     Custom pagination class for comments, overriding the global default of 10.
     """
-    page_size = 100
+    page_size = 1000
     page_size_query_param = 'page_size'
-    max_page_size = 1000
+    max_page_size = 10000
 
 
 class CommentList(generics.ListCreateAPIView):

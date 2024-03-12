@@ -19,11 +19,9 @@ To view and explore the deployed Creature Feature front-end app, [**_please foll
    - [**Project Aims (API)**](#project-aims-api)
    - [**User Stories**](#user-stories)
 1. [**Database Schema**](#database-schema)
-1. [**Data Models**](#data-models)
-1. [**API Endpoints**](#api-endpoints)
+   - [**Data Models**](#data-models)
+   - [**API Endpoints**](#api-endpoints)
 1. [**Technologies Used**](#technologies-used)
-   - [**Frameworks**](#frameworks)
-   - [**Libraries**](#libraries)
 1. [**Testing**](#testing)
 1. [**Deployment**](#deployment)
 1. [**Credits**](#credits)
@@ -87,32 +85,52 @@ The Comment model enables users to create, read, update* and delete* (\*if they 
 
 The LikeComment model is more in line with what users might usually expect with a social media app like this one, and it operates in a much simpler fashion to the Reaction model. When a user creates a comment, The comment ID is created, which is linked to the post ID. When a user who does not own that comment wishes to 'like' it, the model creates a new LikeComment instance, taking the comment ID (linked to the specific post ID), and then the profile ID of the user wishing to like the comment, rather than the profile ID of the user whose comment it is. If a user wants to undo this action (ie, delete the LikeComment instance), they can click the icon again to unlike it. The front-end uses this information to conditionally render the icon used to like the comment, based on whether a user has liked it or not.
 
+#### **Pagination**
+
+The Creature Feature API uses pagination as a way of preventing too much data from being loaded at once (causing problems for performance). A global rule is set to limit responses from the API to 10 per page, and it will provide links to the next page of 10 results. The use of infinite scroll on the front-end loads this data so that users don't have to click a 'next' button every time they've viewed 10 pages.
+
+The only current exception to this is in Comments. The way I have designed the front-end React app meant that using the infinite scroll component for comments under posts was causing bugs that I struggled to find a sufficient solution to, and so I have had to remove it. As such, in comments/views.py there is a custom PageNumberPagination class which sets the maximum number of comments allowed in a single page to a much higher (and currently very unlikely) number, so that user experience is not ruined by comments and posts bugging out. This is something I wish to solve in future.
+
 ### **API Endpoints**
 
 [diagrams...?]
 
 ## **Technologies Used**
 
-_"Frameworks, libraries & dependencies"_
+The language used to write this API is Python. Below is a list of the frameworks and libraries used to create this project, as well as other dependencies:
 
-### **Frameworks**
-
-### **Libraries**
+- Django - the Python framework used to develop this project.
+- Django REST Framework - the Django toolkit that enabled the creation of this API.
+- Django AllAuth - enabling user authentication and validation.
+- Django Rest Auth - to provide endpoints for users to login/logout.
+- ElephantSQL - to host the PostgresSQL database used by this project.
+- Psychopg2 - a database adaptor that enables interaction between Python and PostgresSQL.
+- Cloudinary - to host images and static files that engages seamlessly with the front- and back-end counterparts of this project.
+- Pillow - an imaging library that adds image processing capabilities.
+- Django Filters - to allow queryset filtering based on model fields.
+- Django CORS Headers - to handle the server headers required for Cross-Origin Resource Sharing.
+- Heroku - providing a platform in which to host the deployed project.
+- dBeaver - a program I have relied on greatly throughout the development process to investigate the data that is being passed between my front- and back-end applications.
 
 ## **Testing**
 
-_Link to separate TESTING.md doc, with details of both manual and automated testing as well as resolved and unresolved bugs_
+A separate file has been created for information about testing. Please click the following link to access it: [**_TESTING.md_**](TESTING.md)
 
 ## **Deployment**
 
+In this section I will explain the steps I took in order to deploy this project.
+
 #### **Cloning/Forking**
 
-_How to download and set up project locally, and how it can be deployed - remember the following:_
-_"If you are cloning my project, then you can skip all pip installs below and just run the following command in the terminal to install all the required libraries/packages at once:
-pip install -r requirements.txt
-IMPORTANT - If developing locally on your device, ensure you set up/activate the virtual environment (see below) before installing/generating the requirements.txt file; failure to do this will pollute your machine and put other projects at risk"_
+If you wish to create a clone of this project to use on your local machine or virtual IDE environment such as Gitpod, first navigate to [this project's GitHub Repository](https://github.com/emmacadavra/creature-feature-drf-api), and follow [GitHub's instructions on how to clone a repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository). If you are using a local environment, you can enter the following command in the terminal:
+`pip install -r requirements.txt`
+This will install all the required libraries and packages in one go, meaning you will not have to follow the set-up steps below.
+
+As I developed this project locally, I first created a virtual environment using the command `python -m venv .venv` - if you clone this project to use locally, you must do the same. Ensure that the virtual environment is not tracked by version control by adding it to the .gitignore file.
 
 #### **Project Setup**
+
+Below is a list of the steps and terminal commands I used to install the necessary libraries and packages for this project following the creation of the GitHub repository:
 
 - Cmd for setting up venv: python3 -m venv [your_venv_name] (source [your_venv_name]/bin/activate to activate venv)
 - Follow instructions on project set up cheatsheet EXCEPT FOR:
