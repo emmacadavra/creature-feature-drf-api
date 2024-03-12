@@ -53,25 +53,39 @@ The User Stories for this project can be accessed by following this link to [**_
 
 ## **Database Schema**
 
-Below is a diagram that provides a visual overview of the database tables for this project (created using [**_DrawSQL_**](https://drawsql.app/)):
+Below is a diagram that provides a visual overview of the database tables for this project (created using [**_dBeaver_**](https://dbeaver.com/)):
 
-[diagram]
+![dBeaver database schema](docs/images/dbeaver-schema.png)
 
 ### **Data Models**
 
 #### **User**
 
-#### **Profiles**
+The User model is provided by Django AllAuth, and enabled users to create accounts with a username and password, providing validation and assigning each profle a unique primary key.
 
-#### **Followers**
+#### **Profile**
 
-#### **Posts**
+The Profile model creates a new user profile whenever a new instance of the User model is created. This is possible thanks to the 'create_profile' function within the model. Once created, users are able to update their profile name, its content, and upload a profile image.
 
-#### **Reactions**
+#### **Follower**
 
-#### **Comments**
+The Follower model allows logged in Users to follow or unfollow other Users on the front-end. A 'follow' equals the creation of a new Follower instance, whereas an 'unfollow' deletes that instance from the database. A User can only have one unique Follower ID per user followed, preventing Users from being able to follow the same person multiple times.
 
-#### **Like Comments**
+#### **Post**
+
+The Post model centres around what is arguably the most important part of the Creature Feature app - the ability for users to create, read, update* and delete* (\*if they are the post owner) posts. In addition to the basic expected functionality (such as title, content, image), I have added 'category' as a field, for which there are three choices. These are in line with the overall intention for this app, which is -literally- to feature creatures! I felt that users would appreciate being able to select which variety of creature it is they're featuring, and it also enables users to filter posts based on these categories.
+
+Another custom feature of the Post model is the inclusion of the PostObjects Manager model. A currently hidden feature of the Post model is that it provides users with the ability to store posts they may want to come back to edit later before posting as drafts - this is handled by the PostObjects Manager, and the subsequent 'objects' and 'post_objects' fields. The 'status' field in Post dictates that, by default, all posts are set to 'published' and therefore will appear in any and all searches. Unfortunately at the time of deployment, this feature has not been fully implemented yet, hence being a currently hidden feature. In my Database Schema, there is a field called 'exceprt' which is no longer included in the Post model, but this comes from the same line of thinking as the 'published'/'draft statuses. While currently operating as a single image sharing site, I would like to expand on this in future to implement more blog-like qualities, and create a sort of blog/photo-sharing hybrid. Although I removed 'excerpt', I have decided to keep the PostObjects Manager and the status field where it is, so that I can begin working on this in the near future.
+
+#### **Reaction**
+
+The Reaction model is a custom model that looks after what I would consider to be the most unique and interesting aspect of this app - the ability to 'react' (no pun intended, but welcome all the same) to posts with one of three choices. Each choice is intentionally very cute, and deviates from what users might have come to expect, so it jumps out as a unique selling point. However, users can only select one of the three at a time, and the 'unique_together' field in the model's Meta class takes care of this. The front-end relies on the information received by the Reaction model to perform conditional rendering of the reaction elements based on the user's logged in state, whether they are the owner of the post, and of course which reaction they have chosen.
+
+#### **Comment and LikeComment**
+
+The Comment model enables users to create, read, update* and delete* (\*if they are the comment owners) comments on individual posts. Comments are linked to both posts and profiles, as users are able to access a user's profile by following the link provided through the comment.
+
+The LikeComment model is more in line with what users might usually expect with a social media app like this one, and it operates in a much simpler fashion to the Reaction model. When a user creates a comment, The comment ID is created, which is linked to the post ID. When a user who does not own that comment wishes to 'like' it, the model creates a new LikeComment instance, taking the comment ID (linked to the specific post ID), and then the profile ID of the user wishing to like the comment, rather than the profile ID of the user whose comment it is. If a user wants to undo this action (ie, delete the LikeComment instance), they can click the icon again to unlike it. The front-end uses this information to conditionally render the icon used to like the comment, based on whether a user has liked it or not.
 
 ### **API Endpoints**
 
