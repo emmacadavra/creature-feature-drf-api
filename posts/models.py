@@ -49,7 +49,7 @@ class Post(models.Model):
     category = models.CharField(
         max_length=40,
         choices=category_choices,
-        default='Facinorous Fluffballs'
+        default=category_choices[0],
     )
     status = models.CharField(
         max_length=10,
