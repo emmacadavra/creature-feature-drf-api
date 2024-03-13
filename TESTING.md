@@ -25,6 +25,8 @@ Throughout development, I used a variety of methods to test my API code as I wen
 
 Whilst I was writing the API code, it was also very rare for me to be doing so without first having run the `python2 manage.py runserver` command, so that I could see exactly how my code was being returned by the API, and identify where some errors or conflicts may arise.
 
+As the API is largely URL based, I often tested URL paths by entering incorrect URLs, or logging out/logging in as a different user to make sure that errors were handled correctly. 
+
 When working with both the back-end and the front-end, I was always sure to have my local server running, even when the front-end was accessing the deployed API, so that I could cross reference the objects being returned in each API call with what I was expecting to receive into my React app.
 
 ### **Automated Tests**

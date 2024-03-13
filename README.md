@@ -91,10 +91,6 @@ The Creature Feature API uses pagination as a way of preventing too much data fr
 
 The only current exception to this is in Comments. The way I have designed the front-end React app meant that using the infinite scroll component for comments under posts was causing bugs that I struggled to find a sufficient solution to, and so I have had to remove it. As such, in comments/views.py there is a custom PageNumberPagination class which sets the maximum number of comments allowed in a single page to a much higher (and currently very unlikely) number, so that user experience is not ruined by comments and posts bugging out. This is something I wish to solve in future.
 
-### **API Endpoints**
-
-[API ENDPOINTS]
-
 ## **Technologies Used**
 
 The language used to write this API is Python. Below is a list of the frameworks and libraries used to create this project, as well as other dependencies:
