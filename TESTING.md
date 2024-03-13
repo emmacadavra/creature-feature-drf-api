@@ -15,7 +15,7 @@
 
 Below I have documented the testing undertaken throughout development for this respository's code.
 
-For information on front-end testing, as well as User Story testing, please follow the link to this project's [**_front end respository's TESTING.md document_**](https://github.com/emmacadavra/creature-feature-react/blob/main/TESTING.md).
+For information on front-end testing, please follow the link to this project's [**_front end respository's TESTING.md document_**](https://github.com/emmacadavra/creature-feature-react/blob/main/TESTING.md).
 
 ## **Testing Throughout Development**
 
