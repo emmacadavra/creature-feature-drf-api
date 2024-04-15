@@ -23,9 +23,9 @@ For information on front-end testing, please follow the link to this project's [
 
 Throughout development, I used a variety of methods to test my API code as I went along, in particular using print statements (_a LOT of print statements!_) to help me identify not only exactly what code was being passed from one place to another, but also to discover where things were going wrong if things weren't working as intended. Using a print statement on each step of the code's journey in some cases really helped me solidify my understanding about how data is passed between functions, between models and views, and so on.
 
-Whilst I was writing the API code, it was also very rare for me to be doing so without first having run the `python2 manage.py runserver` command, so that I could see exactly how my code was being returned by the API, and identify where some errors or conflicts may arise.
+Whilst I was writing the API code, it was also very rare for me to be doing so without first having run the `python3 manage.py runserver` command, so that I could see exactly how my code was being returned by the API, and identify where some errors or conflicts may arise.
 
-As the API is largely URL based, I often tested URL paths by entering incorrect URLs, or logging out/logging in as a different user to make sure that errors were handled correctly. 
+As the API is largely URL based, I often tested URL paths by entering incorrect URLs, or logging out/logging in as a different user to make sure that errors were handled correctly.
 
 When working with both the back-end and the front-end, I was always sure to have my local server running, even when the front-end was accessing the deployed API, so that I could cross reference the objects being returned in each API call with what I was expecting to receive into my React app.
 
