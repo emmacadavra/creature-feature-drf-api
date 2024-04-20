@@ -8,15 +8,15 @@
    - [**Automated Tests**](#automated-tests)
    - [**Noteworthy Bugs During Development**](#noteworthy-bugs-during-development)
 1. [**Post Development Testing**](#post-development-testing)
-   - [**Code Validation**](#site-validation)
+   - [**Code Validation**](#code-validation)
    - [**Unresolved Bugs**](#unresolved-bugs)
 1. [**User Story Testing**](#user-story-testing)
    - [**Navigation & Authentication**](#user-stories-navigation--authentication)
    - [**Creating & Editing Posts**](#user-stories-creating--editing-posts)
    - [**Viewing Posts**](#user-stories-viewing-posts)
    - [**Reactions**](#user-stories-reactions)
-   - [**Profiles**](#user-stories-profiles)
    - [**Comments**](#user-stories-comments)
+   - [**Profiles**](#user-stories-profiles)
 
 ## **Testing Overview**
 
@@ -150,21 +150,21 @@ The User Stories for this project can be accessed by following this link to [**_
 | TEST             |    &check;    |
 | TEST             |    &check;    |
 
-### **User Stories: Profiles**
-
-| **_USER STORY_** | **Complete?** |
-| :--------------- | :-----------: |
-| TEST             |    &check;    |
-| TEST             |    &check;    |
-| TEST             |    &check;    |
-
-| **_USER STORY_** | **Complete?** |
-| :--------------- | :-----------: |
-| TEST             |    &check;    |
-| TEST             |    &check;    |
-| TEST             |    &check;    |
-
 ### **User Stories: Comments**
+
+| **_USER STORY_** | **Complete?** |
+| :--------------- | :-----------: |
+| TEST             |    &check;    |
+| TEST             |    &check;    |
+| TEST             |    &check;    |
+
+| **_USER STORY_** | **Complete?** |
+| :--------------- | :-----------: |
+| TEST             |    &check;    |
+| TEST             |    &check;    |
+| TEST             |    &check;    |
+
+### **User Stories: Profiles**
 
 | **_USER STORY_** | **Complete?** |
 | :--------------- | :-----------: |
