@@ -10,6 +10,13 @@
 1. [**Post Development Testing**](#post-development-testing)
    - [**Code Validation**](#site-validation)
    - [**Unresolved Bugs**](#unresolved-bugs)
+1. [**User Story Testing**](#user-story-testing)
+   - [**Navigation & Authentication**](#user-stories-navigation--authentication)
+   - [**Creating & Editing Posts**](#user-stories-creating--editing-posts)
+   - [**Viewing Posts**](#user-stories-viewing-posts)
+   - [**Reactions**](#user-stories-reactions)
+   - [**Profiles**](#user-stories-profiles)
+   - [**Comments**](#user-stories-comments)
 
 ## **Testing Overview**
 
@@ -82,5 +89,93 @@ Other than this, my code passes PEP8 guidelines.
 ### **Unresolved Bugs**
 
 At this time, to the best of my knowledge, I am unaware of any unresolved bugs in the code within this repository.
+
+## **User Story Testing**
+
+The User Stories for this project can be accessed by following this link to [**_the front-end repository’s project board_**](https://github.com/users/emmacadavra/projects/5). Further information on these User Stories an be found in the separate [**_AGILE.md document_**](https://github.com/emmacadavra/creature-feature-react/blob/main/AGILE.md), also within the front-end repository. Below, I have detailed how I tested the User Stories that are specific to the API.
+
+### **User Stories: Navigation & Authentication**
+
+| **_USER STORY_** | **Complete?** |
+| :--------------- | :-----------: |
+| TEST             |    &check;    |
+| TEST             |    &check;    |
+| TEST             |    &check;    |
+
+| **_USER STORY_** | **Complete?** |
+| :--------------- | :-----------: |
+| TEST             |    &check;    |
+| TEST             |    &check;    |
+| TEST             |    &check;    |
+
+### **User Stories: Creating & Editing Posts**
+
+| **_USER STORY_** | **Complete?** |
+| :--------------- | :-----------: |
+| TEST             |    &check;    |
+| TEST             |    &check;    |
+| TEST             |    &check;    |
+
+| **_USER STORY_** | **Complete?** |
+| :--------------- | :-----------: |
+| TEST             |    &check;    |
+| TEST             |    &check;    |
+| TEST             |    &check;    |
+
+### **User Stories: Viewing Posts**
+
+| **_USER STORY_** | **Complete?** |
+| :--------------- | :-----------: |
+| TEST             |    &check;    |
+| TEST             |    &check;    |
+| TEST             |    &check;    |
+
+| **_USER STORY_** | **Complete?** |
+| :--------------- | :-----------: |
+| TEST             |    &check;    |
+| TEST             |    &check;    |
+| TEST             |    &check;    |
+
+### **User Stories: Reactions**
+
+| **_USER STORY_** | **Complete?** |
+| :--------------- | :-----------: |
+| TEST             |    &check;    |
+| TEST             |    &check;    |
+| TEST             |    &check;    |
+
+| **_USER STORY_** | **Complete?** |
+| :--------------- | :-----------: |
+| TEST             |    &check;    |
+| TEST             |    &check;    |
+| TEST             |    &check;    |
+
+### **User Stories: Profiles**
+
+| **_USER STORY_** | **Complete?** |
+| :--------------- | :-----------: |
+| TEST             |    &check;    |
+| TEST             |    &check;    |
+| TEST             |    &check;    |
+
+| **_USER STORY_** | **Complete?** |
+| :--------------- | :-----------: |
+| TEST             |    &check;    |
+| TEST             |    &check;    |
+| TEST             |    &check;    |
+
+### **User Stories: Comments**
+
+| **_USER STORY_** | **Complete?** |
+| :--------------- | :-----------: |
+| TEST             |    &check;    |
+| TEST             |    &check;    |
+| TEST             |    &check;    |
+
+| **_USER STORY_** | **Complete?** |
+| :--------------- | :-----------: |
+| TEST             |    &check;    |
+| TEST             |    &check;    |
+| TEST             |    &check;    |
 
 Please click the following link to return to the [**_README.md_**](README.md) document.
