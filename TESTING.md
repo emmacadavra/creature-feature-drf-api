@@ -116,6 +116,7 @@ The User Stories for this project can be accessed by following this link to [**_
 | Using the command `python3 manage.py runserver`, log in to Django REST with superuser credentials and navigate to /posts to create a new post                                                                                  |    &check;    |
 | Test that all fields marked as required are functioning correctly and that error handling shows the correct error messages by attempting to create a post with no data, then no data in each required field one by one         |    &check;    |
 | Create a post that contains data in all required fields to test whether Django REST redirects logged in user to a detail page (/posts/[post id]) containing all the correct post information, including the post's assigned ID |    &check;    |
+| Create a post that contains data in all required fields, but contains no image - ensure that the specified default image is used                                                                                               |    &check;    |
 | Navigate back to /posts to see the full Post List and confirm that the most recent post added is at the top of the list                                                                                                        |    &check;    |
 
 | **As a logged in user, I can choose a category for my post so that users know which kind of creature I’m featuring!**                                          | **Complete?** |
@@ -212,22 +213,25 @@ The User Stories for this project can be accessed by following this link to [**_
 
 ### **User Stories: Profiles**
 
-| **As a user I can see a list of the most followed profiles so that I can see which profiles are popular** | **Complete?** |
-| :-------------------------------------------------------------------------------------------------------- | :-----------: |
-| TEST                                                                                                      |    &check;    |
-| TEST                                                                                                      |    &check;    |
-| TEST                                                                                                      |    &check;    |
+| **As a user I can see a list of the most followed profiles so that I can see which profiles are popular**                                                                                                                              | **Complete?** |
+| :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-----------: |
+| Navigate to the /profiles API endpoint to see the list of created profiles, and select 'followers_count - descending' in the Ordering section - check that this updates the profile list to show the most followed profiles at the top |    &check;    |
 
-| **As a logged in user I can follow and unfollow other users so that I can see and remove posts by specific users in my posts feed** | **Complete?** |
-| :---------------------------------------------------------------------------------------------------------------------------------- | :-----------: |
-| TEST                                                                                                                                |    &check;    |
-| TEST                                                                                                                                |    &check;    |
-| TEST                                                                                                                                |    &check;    |
+| **As a logged in user I can follow and unfollow other users so that I can see and remove posts by specific users in my posts feed**                                                                                                                                                                                  | **Complete?** |
+| :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-----------: |
+| When logged in as a superuser, navigate to the /followers API endpoint and select a profile to follow, checking that the API displays a detail view of the follow information once created, including its assigned ID                                                                                                |    &check;    |
+| Navigate to the profile that was followed (/profiles/[profile id]), checking that the 'followers_count' has increased by 1                                                                                                                                                                                           |    &check;    |
+| Navigate to the current logged in superuser's profile (/profiles/[profile id]), checking that the 'following_count' has increased by 1                                                                                                                                                                               |    &check;    |
+| On the detail view for the follow (/followers/[follow id]), delete the follow and check it has been removed from the followers list, and that both the 'followers_count' on the profile that was followed/unfollowed and the 'following_count' on the current logged in superuser's profile have both decreased by 1 |    &check;    |
+| Follow the same account again, to ensure that users can follow and unfollow at will                                                                                                                                                                                                                                  |    &check;    |
+| Confirm that users can only follow/unfollow profiles when they are logged in by logging out and checking that the option to do either are not visible                                                                                                                                                                |    &check;    |
+| Test that followed profiles can only be unfollowed by the user who created the follow by navigating to the detail view for the follow when logged in as a different superuser, to confirm the option to unfollow is not visible                                                                                      |    &check;    |
 
-| **As a logged in user I can edit my profile so that I can change my profile picture and bio** | **Complete?** |
-| :-------------------------------------------------------------------------------------------- | :-----------: |
-| TEST                                                                                          |    &check;    |
-| TEST                                                                                          |    &check;    |
-| TEST                                                                                          |    &check;    |
+| **As a logged in user I can edit my profile so that I can change my profile picture and bio**                                                                                                                                        | **Complete?** |
+| :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-----------: |
+| When logged in as a superuser, find their auto-generated profile ID from the profiles list at /profiles, then go to the profile detail view (/profiles/[profile id]) to confirm that the user is able to update their profile        |    &check;    |
+| User profiles are given the specified default image automatically, but when updating profile information (not the image), test that the image stays the same and it does not reset to the default                                    |    &check;    |
+| After editing a profile, ensure that the updated information is now reflected in the detail view                                                                                                                                     |    &check;    |
+| Ensure that profiles can only be edited by their logged in owners by navigating to the profile view of a different superuser and confirming the option to edit is not there, and by logging out and checking that it is not possible |    &check;    |
 
 Please click the following link to return to the [**_README.md_**](README.md) document.
