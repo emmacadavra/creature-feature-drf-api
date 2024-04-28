@@ -70,7 +70,7 @@ For this, I used dBeaver to access to my database and amend the post categories 
 
 I came across quite a few bugs when trying to get Reactions right. Originally, even though I provided the choices from the start, I followed a similar pattern to categories in that I found myself in situations where the wrong things were being pulled through to the API. Once I had fixed that, the reactions were working, but I realised I'd only included a single 'count' field in the post view, so I was unable to pull through how many of each reaction there were - only how many there were in total. To fix this, I added individual count fields to the queryset.
 
-Another bug relating to reactions was that, when attempting to filter posts by only ones a user had reacted to, I was still getting all posts in the list, regardless of whether or not I'd reacted to them. This bug was caused by me incorrectly adding 'reactions**owner**profile' to the 'ordering_fields' in the post view, rather than the 'filterset_fields'.
+Another bug relating to reactions was that, when attempting to filter posts by only ones a user had reacted to, I was still getting all posts in the list, regardless of whether or not I'd reacted to them. This bug was caused by me incorrectly adding `reactions__owner__profile` to the 'ordering_fields' in the post view, rather than the 'filterset_fields'.
 
 Quite late into development, when testing the front-end reaction functionality, I came back to the API code to discover I had caused two more bugs relating to reactions. The first was that I was only collecting the reaction ID to send to the front-end, and it wasn't being specifically linked to the reaction type. I fixed this by adding the post serializer field 'current_user_reaction', and defining the 'get_current_user_reaction' function, which would return an object containing both the ID and the type.
 
@@ -92,90 +92,132 @@ At this time, to the best of my knowledge, I am unaware of any unresolved bugs i
 
 ## **User Story Testing**
 
-The User Stories for this project can be accessed by following this link to [**_the front-end repository’s project board_**](https://github.com/users/emmacadavra/projects/5). Further information on these User Stories an be found in the separate [**_AGILE.md document_**](https://github.com/emmacadavra/creature-feature-react/blob/main/AGILE.md), also within the front-end repository. Below, I have detailed how I tested the User Stories that are specific to the API.
+The User Stories for this project can be accessed by following this link to [**_the front-end repository’s project board_**](https://github.com/users/emmacadavra/projects/5). Further information on these User Stories an be found in the separate [**_AGILE.md document_**](https://github.com/emmacadavra/creature-feature-react/blob/main/AGILE.md), also within the front-end repository. Below, I have detailed how I tested the User Stories that relate to the API, using the back end to test the functionality. These tests were completed with Debug mode set to 'True', in order to access Django REST's UI as well as detailed information about any errors that may occur.
 
-### **User Stories: Navigation & Authentication**
+### **User Stories: Authentication**
 
-| **_USER STORY_** | **Complete?** |
-| :--------------- | :-----------: |
-| TEST             |    &check;    |
-| TEST             |    &check;    |
-| TEST             |    &check;    |
+| **As a user I can create a new account so that I can access all the features for signed up users**                                                                                                                                                            | **Complete?** |
+| :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :-----------: |
+| Create a new admin user profile by using the `createsuperuser` console command                                                                                                                                                                                |    &check;    |
+| Log into the admin panel of the app to confirm that super user has been created successfully                                                                                                                                                                  |    &check;    |
+| Run the API server and navigate to the /profiles endpoint to confirm the superuser has had a profile automatically created alongside the account                                                                                                              |    &check;    |
+| _[After front-end UI has started being built]_ Click the 'Sign Up' button and create a standard account (not superuser) through Django AllAuth's /signup page. Repeat previous step to confirm that the account has been created, with a profile alongside it |    &check;    |
 
-| **_USER STORY_** | **Complete?** |
-| :--------------- | :-----------: |
-| TEST             |    &check;    |
-| TEST             |    &check;    |
-| TEST             |    &check;    |
+| **As a user I can sign in to the app so that I can access functionality for logged in users**                                                             | **Complete?** |
+| :-------------------------------------------------------------------------------------------------------------------------------------------------------- | :-----------: |
+| Using the command `python3 manage.py runserver`, log in to Django REST with superuser credentials                                                         |    &check;    |
+| Navigate to the /posts API endpoint and confirm that the ability to create a post is now displayed after logging in, repeat with /comments and /reactions |    &check;    |
+| Log out again and follow the previous step to confirm that these options do not appear for logged out users                                               |    &check;    |
 
 ### **User Stories: Creating & Editing Posts**
 
-| **_USER STORY_** | **Complete?** |
-| :--------------- | :-----------: |
-| TEST             |    &check;    |
-| TEST             |    &check;    |
-| TEST             |    &check;    |
+| **As a logged in user I can create posts so that I can feature my creatures!**                                                                                                                                            | **Complete?** |
+| :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :-----------: |
+| Using the command `python3 manage.py runserver`, log in to Django REST with superuser credentials and navigate to /posts to create a new post                                                                             |    &check;    |
+| Test that all fields marked as required are functioning correctly and that error handling shows the correct error messages by attempting to create a post with no data, then no data in each required field one by one    |    &check;    |
+| Create a post that contains data in all required fields to test whether Django REST redirects logged in user to a detail page (/posts/[id]) containing all the correct post information, including the post's assigned ID |    &check;    |
+| Navigate back to /posts to see the full Post List and confirm that the most recent post added is at the top of the list                                                                                                   |    &check;    |
 
-| **_USER STORY_** | **Complete?** |
-| :--------------- | :-----------: |
-| TEST             |    &check;    |
-| TEST             |    &check;    |
-| TEST             |    &check;    |
+| **As a logged in user, I can choose a category for my post so that users know which kind of creature I’m featuring!**                                          | **Complete?** |
+| :------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-----------: |
+| When creating a post, the category drop down appears as part of the form to create the post                                                                    |    &check;    |
+| The category selected is reflected in the detailed post data returned from the API and matches the information requested from the front-end to display propely |    &check;    |
+
+| **As a logged in post owner I can edit my post title and description so that I can make corrections or update my post after it was created**                                                                                                                            | **Complete?** |
+| :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-----------: |
+| When looking at the detail view of a post, test that all fields marked as required are functioning correctly and that error handling shows the correct error messages by attempting to edit the post to contain no data, then no data in each required field one by one |    &check;    |
+| Making sure all required fields contain data, edit the existing post and navigate to the post detail page (/posts/[id]) to ensure the post now contains the edited data                                                                                                 |    &check;    |
+| Log out to confirm that posts can only be edited when the user is logged in                                                                                                                                                                                             |    &check;    |
+| Log in as a different superuser, and navigate to the same post detail page to confirm that posts can only be edited by the user that created them                                                                                                                       |    &check;    |
 
 ### **User Stories: Viewing Posts**
 
-| **_USER STORY_** | **Complete?** |
-| :--------------- | :-----------: |
-| TEST             |    &check;    |
-| TEST             |    &check;    |
-| TEST             |    &check;    |
+| **As a user I can view all the most recent posts, ordered by most recently created first so that I am up to date with the newest content**                        | **Complete?** |
+| :---------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-----------: |
+| Navigate to /posts to see a list of all posts in the order set by the Meta class in the Post model (newest first)                                                 |    &check;    |
+| Create a new post to check that it appears at the top of the list when created                                                                                    |    &check;    |
+| Edit an existing post that is not at the top of the list to ensure that it stays in the same place in the list after editing (rather than moving back to the top) |    &check;    |
 
-| **_USER STORY_** | **Complete?** |
-| :--------------- | :-----------: |
-| TEST             |    &check;    |
-| TEST             |    &check;    |
-| TEST             |    &check;    |
+| **As a user, I can search for posts with keywords, so that I can find the posts and user profiles I am interested in**                                                                                                     | **Complete?** |
+| :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-----------: |
+| Navigate to /posts to see the full list of posts, and click the 'Filters' button to check that all filters in the PostList API View are showing                                                                            |    &check;    |
+| Enter search terms into the search bar to check it is working as expected, and that no posts display if the search doesn't match an existing post's title or category, or if it doesn't match a registered user's username |    &check;    |
+| Perform a search combining different filters and search terms to confirm that users can search for things more specifically if they want to, for example using a search term but only for posts of a specific category     |    &check;    |
+
+| **As a user, I can filter posts by category so that I can view posts featuring specific types of creature**                                          | **Complete?** |
+| :--------------------------------------------------------------------------------------------------------------------------------------------------- | :-----------: |
+| Navigate to /posts to see the full list of posts, and click the 'Filters' button to check that all filters in the PostList API View are showing      |    &check;    |
+| Select each category filter individually to check it is working as expected, and that only posts with that category are showing in the list of posts |    &check;    |
+| Edit a post's category and make sure that the post is only picked up by the updated category, not the one it was originally created with             |    &check;    |
+
+| **As a logged in user, I can view the posts I have reacted to so that I can revisit the posts I enjoy the most**                                                                                                                                                                                                                                             | **Complete?** |
+| :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-----------: |
+| _[After one or more post reactions have been created]_ When viewing the list of all posts, select the fourth Field Filter option, `reactions__owner__profile` (Django REST displays this as '[invalid name]', which is a known bug with Django REST) and select a superuser to check that the updated post list only contains posts that user has reacted to |    &check;    |
+| Create new reactions, and delete existing reactions to ensure that the list continues to pull through the correct data                                                                                                                                                                                                                                       |    &check;    |
+
+| **As a logged in user I can view content filtered by users I follow so that I can keep up to date with what they are posting about**                                                                                                                                                                                                                                                            | **Complete?** |
+| :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-----------: |
+| _[After following one or more profiles]_ When viewing the list of all posts, select the third Field Filter option, `owner__followed__owner__profile` (Django REST displays this as '[invalid name]', which is a known bug with Django REST) and select the logged in superuser to check that the updated post list only contains posts that have been made by users that superuser is following |    &check;    |
+| Follow and unfollow different users to check that the list updates correctly when the filter is applied                                                                                                                                                                                                                                                                                         |    &check;    |
 
 ### **User Stories: Reactions**
 
-| **_USER STORY_** | **Complete?** |
-| :--------------- | :-----------: |
-| TEST             |    &check;    |
-| TEST             |    &check;    |
-| TEST             |    &check;    |
+| **As a logged in user, I can react to a post with clear visual feedback that I have done so, so that I know how I have reacted and understand I can only pick one** | **Complete?** |
+| :------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :-----------: |
+| TEST                                                                                                                                                                |    &check;    |
+| TEST                                                                                                                                                                |    &check;    |
+| TEST                                                                                                                                                                |    &check;    |
 
-| **_USER STORY_** | **Complete?** |
-| :--------------- | :-----------: |
-| TEST             |    &check;    |
-| TEST             |    &check;    |
-| TEST             |    &check;    |
+| **As a logged in user, I can click/tap again on a reaction to undo it, with clear visual feedback that I have done so, so that I can choose a different reaction if I change my mind** | **Complete?** |
+| :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-----------: |
+| TEST                                                                                                                                                                                   |    &check;    |
+| TEST                                                                                                                                                                                   |    &check;    |
+| TEST                                                                                                                                                                                   |    &check;    |
 
 ### **User Stories: Comments**
 
-| **_USER STORY_** | **Complete?** |
-| :--------------- | :-----------: |
-| TEST             |    &check;    |
-| TEST             |    &check;    |
-| TEST             |    &check;    |
+| **As a logged in user I can add comments to a post so that I can share my thoughts about the post** | **Complete?** |
+| :-------------------------------------------------------------------------------------------------- | :-----------: |
+| TEST                                                                                                |    &check;    |
+| TEST                                                                                                |    &check;    |
+| TEST                                                                                                |    &check;    |
 
-| **_USER STORY_** | **Complete?** |
-| :--------------- | :-----------: |
-| TEST             |    &check;    |
-| TEST             |    &check;    |
-| TEST             |    &check;    |
+| **As a logged in owner of a comment I can edit my comment so that I can fix or update my existing comment** | **Complete?** |
+| :---------------------------------------------------------------------------------------------------------- | :-----------: |
+| TEST                                                                                                        |    &check;    |
+| TEST                                                                                                        |    &check;    |
+| TEST                                                                                                        |    &check;    |
+
+| **As a logged in owner of a comment I can delete my comment so that I can control removal of my comment from the application** | **Complete?** |
+| :----------------------------------------------------------------------------------------------------------------------------- | :-----------: |
+| TEST                                                                                                                           |    &check;    |
+| TEST                                                                                                                           |    &check;    |
+| TEST                                                                                                                           |    &check;    |
+
+| **As a logged in user I can like the comments of other users so that I can show support or agreement as to what other users have to say** | **Complete?** |
+| :---------------------------------------------------------------------------------------------------------------------------------------- | :-----------: |
+| TEST                                                                                                                                      |    &check;    |
+| TEST                                                                                                                                      |    &check;    |
+| TEST                                                                                                                                      |    &check;    |
 
 ### **User Stories: Profiles**
 
-| **_USER STORY_** | **Complete?** |
-| :--------------- | :-----------: |
-| TEST             |    &check;    |
-| TEST             |    &check;    |
-| TEST             |    &check;    |
+| **As a user I can see a list of the most followed profiles so that I can see which profiles are popular** | **Complete?** |
+| :-------------------------------------------------------------------------------------------------------- | :-----------: |
+| TEST                                                                                                      |    &check;    |
+| TEST                                                                                                      |    &check;    |
+| TEST                                                                                                      |    &check;    |
 
-| **_USER STORY_** | **Complete?** |
-| :--------------- | :-----------: |
-| TEST             |    &check;    |
-| TEST             |    &check;    |
-| TEST             |    &check;    |
+| **As a logged in user I can follow and unfollow other users so that I can see and remove posts by specific users in my posts feed** | **Complete?** |
+| :---------------------------------------------------------------------------------------------------------------------------------- | :-----------: |
+| TEST                                                                                                                                |    &check;    |
+| TEST                                                                                                                                |    &check;    |
+| TEST                                                                                                                                |    &check;    |
+
+| **As a logged in user I can edit my profile so that I can change my profile picture and bio** | **Complete?** |
+| :-------------------------------------------------------------------------------------------- | :-----------: |
+| TEST                                                                                          |    &check;    |
+| TEST                                                                                          |    &check;    |
+| TEST                                                                                          |    &check;    |
 
 Please click the following link to return to the [**_README.md_**](README.md) document.
