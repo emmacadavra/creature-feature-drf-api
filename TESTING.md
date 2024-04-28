@@ -20,9 +20,9 @@
 
 ## **Testing Overview**
 
-Below I have documented the testing undertaken throughout development for this respository's code.
+Below I have documented the testing undertaken throughout development for this repository's code.
 
-For information on front-end testing, please follow the link to this project's [**_front end respository's TESTING.md document_**](https://github.com/emmacadavra/creature-feature-react/blob/main/TESTING.md).
+For information on front-end testing, please follow the link to this project's [**_front end repository's TESTING.md document_**](https://github.com/emmacadavra/creature-feature-react/blob/main/TESTING.md).
 
 ## **Testing Throughout Development**
 
@@ -44,7 +44,7 @@ I would have liked to experiment more with automated testing in this project, bu
 
 ### **Noteworthy Bugs During Development**
 
-As this is the largest and most complex project I have worked on to date, it goes without saying that I faced a great many bugs throughout development. Some of these were the result of using newer versions of Frameworks than I was used to, or that were being used in the CI course content, and many of them were down to not connecting models to views correctly, or adding too many/too few fields into serializers. Additionally, although I have used Django before, I was new to Django REST at the start of this project and there were many occasions on which I thought I was experiencing a bug, but it was in fact just the way that the Django REST development server us presented.
+As this is the largest and most complex project I have worked on to date, it goes without saying that I faced a great many bugs throughout development. Some of these were the result of using newer versions of Frameworks than I was used to, or that were being used in the CI course content, and many of them were down to not connecting models to views correctly, or adding too many/too few fields into serializers. Additionally, although I have used Django before, I was new to Django REST at the start of this project and there were many occasions on which I thought I was experiencing a bug, but it was in fact just the way that the Django REST development server was presented.
 
 For example, when testing the Post model, I found that the post status was always set to 'Draft' first, despite the default being 'Published'. The same thing occurred with image filters, where the default is 'normal' but the first option was always '1977'. It took me a while to get used to the fact that the first option in the dropdown on the back end was just the first item in the list, and it didn't reflect what I'd set as the default.
 
@@ -64,7 +64,7 @@ Eventually I realised that, due to the changes I had made, I was unable to edit 
 
 ![Error updating existing posts with default category](docs/images/fluffy-undefined.png)
 
-For this, I used dBeaver to access to my database and amend the post categories manually, which fixed the issue.
+For this, I used dBeaver to access my database and amend the post categories manually, which fixed the issue.
 
 #### Reactions
 
@@ -82,7 +82,7 @@ Lastly, again in the view for posts, I discovered very late into development tha
 
 The two resources I used to validate my Python code were the VSCode extension 'Flake8', and the [**_Code Institute Python Linter_**](https://pep8ci.herokuapp.com/#).
 
-The majority of this project's code came back without any issues, and where there were issues, they were all occasions on which a line was considered too long. However, these only occured in my main settings.py file, and some of the urls.py files. Looking into the matter, I found that it is advised not to shorted items in settings.py (especially where they have automatically been set by Django), and for some of the url files there seemed to be no way for me to cleanly shorten them.
+The majority of this project's code came back without any issues, and where there were issues, they were all occasions on which a line was considered too long. However, these only occurred in my main settings.py file, and some of the urls.py files. Looking into the matter, I found that it is advised not to shorten items in settings.py (especially where they have automatically been set by Django), and for some of the url files there seemed to be no way for me to cleanly shorten them.
 
 Other than this, my code passes PEP8 guidelines.
 
@@ -96,12 +96,12 @@ The User Stories for this project can be accessed by following this link to [**_
 
 ### **User Stories: Authentication**
 
-| **As a user I can create a new account so that I can access all the features for signed up users**                                                                                                                                                            | **Complete?** |
-| :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :-----------: |
-| Create a new admin user profile by using the `createsuperuser` console command                                                                                                                                                                                |    &check;    |
-| Log into the admin panel of the app to confirm that super user has been created successfully                                                                                                                                                                  |    &check;    |
-| Run the API server and navigate to the /profiles endpoint to confirm the superuser has had a profile automatically created alongside the account                                                                                                              |    &check;    |
-| _[After front-end UI has started being built]_ Click the 'Sign Up' button and create a standard account (not superuser) through Django AllAuth's /signup page. Repeat previous step to confirm that the account has been created, with a profile alongside it |    &check;    |
+| **As a user I can create a new account so that I can access all the features for signed up users**                                                                                                                                                                | **Complete?** |
+| :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-----------: |
+| Create a new admin user profile by using the `createsuperuser` console command                                                                                                                                                                                    |    &check;    |
+| Log into the admin panel of the app to confirm that superuser has been created successfully                                                                                                                                                                       |    &check;    |
+| Run the API server and navigate to the /profiles endpoint to confirm the superuser has had a profile automatically created alongside the account                                                                                                                  |    &check;    |
+| _[After the front-end UI had started being built]_ Click the 'Sign Up' button and create a standard account (not superuser) through Django AllAuth's /signup page. Repeat previous step to confirm that the account has been created, with a profile alongside it |    &check;    |
 
 | **As a user I can sign in to the app so that I can access functionality for logged in users**                                                             | **Complete?** |
 | :-------------------------------------------------------------------------------------------------------------------------------------------------------- | :-----------: |
@@ -119,10 +119,10 @@ The User Stories for this project can be accessed by following this link to [**_
 | Create a post that contains data in all required fields, but contains no image - ensure that the specified default image is used                                                                                               |    &check;    |
 | Navigate back to /posts to see the full Post List and confirm that the most recent post added is at the top of the list                                                                                                        |    &check;    |
 
-| **As a logged in user, I can choose a category for my post so that users know which kind of creature I’m featuring!**                                          | **Complete?** |
-| :------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-----------: |
-| When creating a post, the category drop down appears as part of the form to create the post                                                                    |    &check;    |
-| The category selected is reflected in the detailed post data returned from the API and matches the information requested from the front-end to display propely |    &check;    |
+| **As a logged in user, I can choose a category for my post so that users know which kind of creature I’m featuring!**                                           | **Complete?** |
+| :-------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-----------: |
+| When creating a post, the category drop down appears as part of the form to create the post                                                                     |    &check;    |
+| The category selected is reflected in the detailed post data returned from the API and matches the information requested from the front-end to display properly |    &check;    |
 
 | **As a logged in post owner I can edit my post title and description so that I can make corrections or update my post after it was created**                                                                                                                            | **Complete?** |
 | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-----------: |

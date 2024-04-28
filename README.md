@@ -59,7 +59,7 @@ Below is a diagram that provides a visual overview of the database tables for th
 
 #### **User**
 
-The User model is provided by Django AllAuth, and enabled users to create accounts with a username and password, providing validation and assigning each profle a unique primary key.
+The User model is provided by Django AllAuth, and enables users to create accounts with a username and password, providing validation and assigning each profile a unique primary key.
 
 #### **Profile**
 
@@ -101,7 +101,7 @@ The language used to write this API is Python. Below is a list of the frameworks
 - Django Rest Auth - to provide endpoints for users to login/logout.
 - ElephantSQL - to host the PostgresSQL database used by this project.
 - Psychopg2 - a database adaptor that enables interaction between Python and PostgresSQL.
-- Cloudinary - to host images and static files that engages seamlessly with the front- and back-end counterparts of this project.
+- Cloudinary - to host images and static files that engage seamlessly with the front- and back-end counterparts of this project.
 - Pillow - an imaging library that adds image processing capabilities.
 - Django Filters - to allow queryset filtering based on model fields.
 - Django CORS Headers - to handle the server headers required for Cross-Origin Resource Sharing.
@@ -149,7 +149,7 @@ Below is a list of the steps and terminal commands I used to install the necessa
    - `python3 manage.py makemigrations`
    - `python3 manage.py migrate`
 1. To test that everything has been set up correctly, run the server locally:
-   - `python3 manage.py runserver` (note: you may need to adjust the `ALLOWED_HOSTS` section of `settings.py` if Django provides and error stating so.)
+   - `python3 manage.py runserver` (note: you may need to adjust the `ALLOWED_HOSTS` section of `settings.py` if Django provides an error stating so.)
 
 #### **Database Setup**
 
@@ -163,7 +163,7 @@ This project uses [**_ElephantSQL_**](https://www.elephantsql.com/) to host its 
 
 #### **Environment Variables and Settings**
 
-1. Create a file in the main project directory called 'env.py', and add it to the .gitignore file - this files stores private environment variables and must be kept hidden.
+1. Create a file in the main project directory called 'env.py', and add it to the .gitignore file - this file stores private environment variables and must be kept hidden.
 1. Add the key `DATABASE_URL` to env.py and assign it the ElephantSQL URL as a value:
    - `os.environ["DATABASE_URL"] = "postgres://ElephantSQL Database URL"`
 1. Add the key 'SECRET_KEY' to env.py and assign it something secret (and more secure than "SecretKey123"!) as a value:
@@ -201,7 +201,7 @@ This project uses [**_ElephantSQL_**](https://www.elephantsql.com/) to host its 
 1. Create a `DEV` environment variable in your `env.py` file:
    - `os.environ['DEV'] = 1`
 1. Add the following to `settings.py`:
-   - `REST_FRAMEWORK = { 'DEFAULT_AUTHENTICATION_CLASSES': [( 'rest_framework.authentication.SessionAuthenticatio n' if 'DEV' in os.environ else 'dj_rest_auth.jwt_auth.JWTCookieAuthentication'  )] }`
+   - `REST_FRAMEWORK = { 'DEFAULT_AUTHENTICATION_CLASSES': [( 'rest_framework.authentication.SessionAuthentication' if 'DEV' in os.environ else 'dj_rest_auth.jwt_auth.JWTCookieAuthentication'  )] }`
    - `REST_USE_JWT = True`
    - `JWT_AUTH_COOKIE = 'my-app-auth'`
    - `JWT_AUTH_SECURE = True`
@@ -258,5 +258,5 @@ For the final deployment, make sure to set `DEBUG = False` in `settings.py` and 
 
 ### Code and Content References
 
-- This project was created by following along with [**_Code Institute_**](https://codeinstitute.net/)'s 'Django REST Framework' course content and walkthrough, and as such will bear significant resemblence to it - in some case being identical. As well as many instances of my code coming from those lessons, I have also used the default profile image and default post images provided by them. I am extremely grateful to the course providers for their instruction on how to create a Django REST API, and have made an effort where possible to create my own code (especially in the case of Posts and Reactions, and also with LikeComments), and have used newer versions of the technologies where possible, but ultimately the structure of this API is thanks to the code they have taught.
-- The currently unused code in the Post model relating to published status, and the use of Django Model Managers, is thanks to [**_Very Academy_**](https://www.youtube.com/@veryacademy), whose [**_Learn Django Rest Framework YouTube series_**](https://www.youtube.com/watch?v=soxd_xdHR0o&list=PLOLrQ9Pn6caw0PjVwymNc64NkUNbZlhFw&index=2&t=5684s) was extremely interesting and helpful throughout my learing proces.
+- This project was created by following along with [**_Code Institute_**](https://codeinstitute.net/)'s 'Django REST Framework' course content and walkthrough, and as such will bear significant resemblance to it - in some cases being identical. As well as many instances of my code coming from those lessons, I have also used the default profile image and default post images provided by them. I am extremely grateful to the course providers for their instruction on how to create a Django REST API, and have made an effort where possible to create my own code (especially in the case of Posts and Reactions, and also with LikeComments), and have used newer versions of the technologies where possible, but ultimately the structure of this API is thanks to the code they have taught.
+- The currently unused code in the Post model relating to published status, and the use of Django Model Managers, is thanks to [**_Very Academy_**](https://www.youtube.com/@veryacademy), whose [**_Learn Django Rest Framework YouTube series_**](https://www.youtube.com/watch?v=soxd_xdHR0o&list=PLOLrQ9Pn6caw0PjVwymNc64NkUNbZlhFw&index=2&t=5684s) was extremely interesting and helpful throughout my learning process.
